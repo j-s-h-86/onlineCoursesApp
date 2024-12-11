@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class DBContext
 {
@@ -41,16 +41,15 @@ class DBContext
         if ($initialized)
             return;
 
-        // Create teachers table first
         $sql = "CREATE TABLE IF NOT EXISTS `teachers` (
             `id` INT AUTO_INCREMENT NOT NULL,
             `teacherName` VARCHAR(200) NOT NULL,
+            `teacherDescription` VARCHAR(1000) NOT NULL,
             PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
 
         $this->pdo->exec($sql);
 
-        // Create courses table
         $sql = "CREATE TABLE IF NOT EXISTS `courses` (
             `id` INT AUTO_INCREMENT NOT NULL,
             `courseName` VARCHAR(255) NOT NULL,
@@ -62,6 +61,15 @@ class DBContext
 
         $this->pdo->exec($sql);
 
+        $sql = "CREATE TABLE IF NOT EXISTS `orders` (
+        `id` INT AUTO_INCREMENT NOT NULL,
+        `customerName` VARCHAR(255) NOT NULL,
+        `customerEmail` VARCHAR(255) NOT NULL
+        `courseId` INT NOT NULL,
+        PRIMARY KEY (`id`),
+        FOREIGN KEY (`courseId`) REFERENCES ´courses`(`id`)
+        ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+
         $initialized = true;
     }
 
@@ -72,9 +80,9 @@ class DBContext
         $count = $stmt->fetchColumn();
 
         if ($count == 0) {
-            $sql = "INSERT INTO teachers (teacherName) VALUES
-                    ('Johan Hammarstedt'),
-                    ('Drottning Isabitch')";
+            $sql = "INSERT INTO teachers (teacherName, teacherDescription) VALUES
+                    ('Johan Hammarstedt', 'Mångsysslare som sadlat om till livscoach och föreläsare. Expert på att skapa dålig stämning.'),
+                    ('Drottning Isabitch', 'Bortskämd tandläkare som blev av med jobbet för att hon okynnesborrade i folks tänder.')";
             $this->pdo->exec($sql);
         }
 
@@ -86,7 +94,8 @@ class DBContext
             $sql = "INSERT INTO courses (courseName, courseDescription, teacherId) VALUES
                       ('Dålig stämning', 'Grundkurs i att skapa dålig stämning var du än befinner dig.', 1),
                       ('Mer dålig stämning', 'Påbyggnadskurs.', 1),
-                      ('Att vara en översittare', 'Tips och trix för att verka bättre än andra.', 2)";
+                      ('Att vara en översittare', 'Tips och trix för att verka bättre än andra.', 2),
+                      ('Hur man lurar till sig gratis drinkar på krogen och annat nyttigt', 'Den ultimata guiden för nittiotalist-tjejerna.', 2)";
             $this->pdo->exec($sql);
         }
     }

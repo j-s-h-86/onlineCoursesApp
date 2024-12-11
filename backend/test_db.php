@@ -1,5 +1,4 @@
 <?php
-require 'vendor/autoload.php';
 require_once './config/database.php';
 
 $dbContext = new DBContext();
