@@ -20,13 +20,15 @@ switch ($method) {
             echo json_encode($data);
         } else {
             $stmt = $pdo->query("SELECT * FROM courses");
-            $users = [];
+            $courses = [];
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                $users[] = $row;
+                $courses[] = $row;
             }
-            echo json_encode($users);
+            echo json_encode($courses);
         }
         break;
+
+
 
     default:
         echo json_encode(["message" => "Invalid request method"]);
