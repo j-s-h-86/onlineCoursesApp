@@ -63,12 +63,14 @@ class DBContext
 
         $sql = "CREATE TABLE IF NOT EXISTS `orders` (
         `id` INT AUTO_INCREMENT NOT NULL,
-        `customerName` VARCHAR(255) NOT NULL,
-        `customerEmail` VARCHAR(255) NOT NULL
+        `fullName` VARCHAR(255) NOT NULL,
+        `email` VARCHAR(255) NOT NULL,
         `courseId` INT NOT NULL,
         PRIMARY KEY (`id`),
-        FOREIGN KEY (`courseId`) REFERENCES ´courses`(`id`)
+        FOREIGN KEY (`courseId`) REFERENCES `courses`(`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+
+        $this->pdo->exec($sql);
 
         $initialized = true;
     }
@@ -96,6 +98,16 @@ class DBContext
                       ('Mer dålig stämning', 'Påbyggnadskurs.', 1),
                       ('Att vara en översittare', 'Tips och trix för att verka bättre än andra.', 2),
                       ('Hur man lurar till sig gratis drinkar på krogen och annat nyttigt', 'Den ultimata guiden för nittiotalist-tjejerna.', 2)";
+            $this->pdo->exec($sql);
+        }
+
+        $sql = "SELECT COUNT(*) FROM orders";
+        $stmt = $this->pdo->query($sql);
+        $count = $stmt->fetchColumn();
+
+        if ($count == 0) {
+            $sql = "INSERT INTO orders (fullName, email, courseId) VALUES
+                    ('Jovan Rajs', 'jovan.rajs@rattsmedicin.se', 1)";
             $this->pdo->exec($sql);
         }
     }
