@@ -1,9 +1,10 @@
 <script>
 	import { onMount } from 'svelte';
-	import { getCourses, getCourseById, getTeachers, getTeacherById } from '$lib/api';
+	import { getCourses, getCourseById, getTeachers, getTeacherById, getOrders } from '$lib/api';
 
 	let courses = [];
 	let teachers = [];
+	let orders = [];
 
 	async function loadCourses() {
 		try {
@@ -23,8 +24,18 @@
 		console.log(teachers);
 	}
 
+	async function loadOrders() {
+		try {
+			orders = await getOrders();
+		} catch (error) {
+			console.error(error);
+		}
+		console.log(orders);
+	}
+
 	onMount(() => {
 		loadCourses();
 		loadTeachers();
+		loadOrders();
 	});
 </script>

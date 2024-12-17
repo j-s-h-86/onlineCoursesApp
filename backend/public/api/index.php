@@ -2,6 +2,7 @@
 require_once '../../config/database.php';
 require_once '../../models/Course.php';
 require_once '../../models/Teacher.php';
+require_once '../../models/Order.php';
 
 $dbContext = new DBContext();
 $pdo = $dbContext->getPdo();
@@ -43,6 +44,17 @@ switch ($resource) {
         } else {
             $teachers = $teacherModel->getAllTeachers();
             echo json_encode($teachers);
+        }
+        break;
+
+    case 'orders':
+        $orderModel = new Order($pdo);
+        if ($id) {
+            $data = $orderModel->getOrderById($id);
+            echo json_encode($data);
+        } else {
+            $orders = $orderModel->getAllOrders();
+            echo json_encode($orders);
         }
         break;
 

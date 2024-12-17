@@ -41,3 +41,24 @@ export async function getTeacherById(id) {
 	const data = await response.json();
 	return data;
 }
+
+export async function getOrders() {
+	const response = await fetch(`${baseURL}/orders`);
+	if (!response.ok) {
+		throw new Error(`Error fetching orders: ${response.statusText}`);
+	}
+	const data = await response.json();
+	return data;
+}
+
+export async function getOrderById(id) {
+	if (!id) {
+		throw new Error('Order ID is required');
+	}
+	const response = await fetch(`${baseURL}/orders?id=${id}`);
+	if (!response.ok) {
+		throw new Error(`Error fetching order with ID ${id}: ${response.statusText}`);
+	}
+	const data = await response.json();
+	return data;
+}
