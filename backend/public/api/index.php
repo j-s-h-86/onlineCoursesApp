@@ -6,6 +6,10 @@ require_once '../../models/Teacher.php';
 $dbContext = new DBContext();
 $pdo = $dbContext->getPdo();
 
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
 $request_uri = $_SERVER['REQUEST_URI'];
 $request_uri = str_replace('/backend/public/api', '', $request_uri);
 $uri_parts = explode('/', trim($request_uri, '/'));
@@ -14,6 +18,10 @@ $resource = $uri_parts[0] ?? '';
 $id = $uri_parts[1] ?? '';
 
 header("Content-Type: application/json");
+
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    exit(0);
+}
 
 switch ($resource) {
     case 'courses':
