@@ -1,6 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
-	import { getCourses, getCourseById, getTeachers, getTeacherById, getOrders } from '$lib/api';
+	import { getCourses, getTeachers } from '$lib/api';
 	import DisplayCourses from './DisplayCourses.svelte';
 
 	let courses = [];
@@ -8,55 +8,42 @@
 	let orders = [];
 	let error = null;
 
-	// async function loadCourses() {
-	// 	try {
-	// 		courses = await getCourses();
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// 	console.log(courses);
-	// 	return { props: { courses } };
-	// }
-
-	// async function loadTeachers() {
-	// 	try {
-	// 		teachers = await getTeachers();
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// 	console.log(teachers);
-	// 	return { props: { teachers } };
-	// }
-
-	// async function loadOrders() {
-	// 	try {
-	// 		orders = await getOrders();
-	// 	} catch (error) {
-	// 		console.error(error);
-	// 	}
-	// 	console.log(orders);
-	// }
-
-	// onMount(() => {
-	// 	loadCourses();
-	// 	loadTeachers();
-	// 	loadOrders();
-	// });
-
 	onMount(async () => {
 		try {
-			const coursesData = await getCourses(); // Fetch the courses
-			// Map through the courses to rename or modify properties
-			const mappedCourses = coursesData.map((course) => {
+			const teachersData = await getTeachers();
+			console.log('Teachers Data:', teachersData);
+
+			const mappedTeachers = teachersData.map((teacher) => {
 				return {
-					id: course.id, // Keep the course ID
-					name: course.courseName, // Map courseName to name
-					description: course.courseDescription // Map courseDescription to description
+					id: teacher.id,
+					name: teacher.teacherName,
+					email: teacher.teacherEmail
 				};
 			});
-			courses = mappedCourses; // Update the courses with mapped data
+
+			const teacherMap = mappedTeachers.reduce((map, teacher) => {
+				map[teacher.id] = teacher.name;
+				return map;
+			}, {});
+
+			const coursesData = await getCourses();
+			console.log('Courses Data:', coursesData);
+
+			const mappedCourses = coursesData.map((course) => {
+				return {
+					id: course.id,
+					name: course.courseName,
+					description: course.courseDescription,
+					teacherName: teacherMap[course.teacherId] || 'Unknown',
+					occasions: course.occasions,
+					price: course.price
+				};
+			});
+
+			courses = mappedCourses;
+			teachers = mappedTeachers;
 		} catch (err) {
-			error = err.message; // Handle any errors that occur during fetch
+			error = err.message;
 		}
 	});
 </script>
@@ -64,5 +51,5 @@
 {#if error}
 	<p>Error: {error}</p>
 {:else}
-	<DisplayCourses {courses} /> <!-- Pass the mapped courses to DisplayCourses -->
+	<DisplayCourses {courses} />
 {/if}

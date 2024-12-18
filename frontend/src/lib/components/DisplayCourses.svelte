@@ -2,16 +2,37 @@
 	export let courses = [];
 </script>
 
-<h2>Courses</h2>
+<h2>Kursutbud</h2>
 {#if courses.length > 0}
-	<ul>
+	<div class="onlineCourses">
 		{#each courses as course}
-			<li>
+			<div class="course">
 				<h3>{course.name}</h3>
 				<p>{course.description}</p>
-			</li>
+				<p>{course.teacherName}</p>
+			</div>
 		{/each}
-	</ul>
+	</div>
 {:else}
-	<p>No courses available.</p>
+	<p>Inga tillgängliga kurser just nu.</p>
 {/if}
+
+<style>
+	.onlineCourses {
+		width: 100%;
+		height: 100vh;
+		display: flex;
+		justify-content: space-evenly;
+	}
+
+	.course {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-evenly;
+		text-align: center;
+		height: 300px;
+		width: 250px;
+		border: 1px solid black;
+		border-radius: 10%;
+	}
+</style>
