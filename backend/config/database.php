@@ -45,6 +45,7 @@ class DBContext
             `id` INT AUTO_INCREMENT NOT NULL,
             `teacherName` VARCHAR(200) NOT NULL,
             `teacherDescription` VARCHAR(1000) NOT NULL,
+            `teacherEmail` VARCHAR(200) NOT NULL,
             PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
 
@@ -55,6 +56,8 @@ class DBContext
             `courseName` VARCHAR(255) NOT NULL,
             `courseDescription` VARCHAR(255) NOT NULL,
             `teacherId` INT NOT NULL,
+            `occasions` INT NOT NULL,
+            `price` DECIMAL (10, 2) NOT NULL,
             PRIMARY KEY (`id`),
             FOREIGN KEY (`teacherId`) REFERENCES `teachers`(`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
@@ -82,9 +85,9 @@ class DBContext
         $count = $stmt->fetchColumn();
 
         if ($count == 0) {
-            $sql = "INSERT INTO teachers (teacherName, teacherDescription) VALUES
-                    ('Johan Hammarstedt', 'Mångsysslare som sadlat om till livscoach och föreläsare. Expert på att skapa dålig stämning.'),
-                    ('Drottning Isabitch', 'Bortskämd tandläkare som blev av med jobbet för att hon okynnesborrade i folks tänder.')";
+            $sql = "INSERT INTO teachers (teacherName, teacherDescription, teacherEmail) VALUES
+                    ('Johan Hammarstedt', 'Mångsysslare som sadlat om till livscoach och föreläsare. Expert på att skapa dålig stämning.', 'johan@onlinecourses.com'),
+                    ('Drottning Isabitch', 'Bortskämd tandläkare som blev av med jobbet för att hon okynnesborrade i folks tänder.', 'isabitch@onlinecourses.com')";
             $this->pdo->exec($sql);
         }
 
@@ -93,11 +96,11 @@ class DBContext
         $count = $stmt->fetchColumn();
 
         if ($count == 0) {
-            $sql = "INSERT INTO courses (courseName, courseDescription, teacherId) VALUES
-                      ('Dålig stämning', 'Grundkurs i att skapa dålig stämning var du än befinner dig.', 1),
-                      ('Mer dålig stämning', 'Påbyggnadskurs.', 1),
-                      ('Att vara en översittare', 'Tips och trix för att verka bättre än andra.', 2),
-                      ('Hur man lurar till sig gratis drinkar på krogen och annat nyttigt', 'Den ultimata guiden för nittiotalist-tjejerna.', 2)";
+            $sql = "INSERT INTO courses (courseName, courseDescription, teacherId, occasions, price) VALUES
+                      ('Dålig stämning', 'Grundkurs i att skapa dålig stämning var du än befinner dig.', 1, 9, 2100.00),
+                      ('Mer dålig stämning', 'Påbyggnadskurs.', 1, 4, 1500.00),
+                      ('Att vara en översittare', 'Tips och trix för att verka bättre än andra.', 2, 6, 1500.00),
+                      ('Hur man lurar till sig gratis drinkar på krogen och annat nyttigt', 'Den ultimata guiden för nittiotalist-tjejerna.', 2, 8, 1999.00)";
             $this->pdo->exec($sql);
         }
 
