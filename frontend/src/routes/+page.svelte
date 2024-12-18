@@ -3,5 +3,5 @@
 	import Header from '$lib/layout/Header.svelte';
 </script>
 
-<LoadData />
 <Header />
+<LoadData />

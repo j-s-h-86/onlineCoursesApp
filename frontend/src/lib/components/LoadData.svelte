@@ -6,6 +6,7 @@
 	let courses = [];
 	let teachers = [];
 	let orders = [];
+	let error = null;
 
 	// async function loadCourses() {
 	// 	try {
@@ -46,17 +47,13 @@
 		try {
 			const coursesData = await getCourses(); // Fetch the courses
 			// Map through the courses to rename or modify properties
-			const mappedCourses = await Promise.all(
-				coursesData.map(async (course) => {
-					const teacher = await getTeacherById(course.teacherId); // Fetch teacher by ID
-					return {
-						id: course.id, // Keep the course ID
-						name: course.courseName, // Map courseName to name
-						description: course.courseDescription, // Map courseDescription to description
-						teacherName: teacher.name // Add teacher name to course
-					};
-				})
-			);
+			const mappedCourses = coursesData.map((course) => {
+				return {
+					id: course.id, // Keep the course ID
+					name: course.courseName, // Map courseName to name
+					description: course.courseDescription // Map courseDescription to description
+				};
+			});
 			courses = mappedCourses; // Update the courses with mapped data
 		} catch (err) {
 			error = err.message; // Handle any errors that occur during fetch
