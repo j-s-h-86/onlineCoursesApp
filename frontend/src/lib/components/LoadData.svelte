@@ -1,10 +1,9 @@
 <script>
 	import { onMount } from 'svelte';
+	import { courses, teachers } from '$lib/stores';
 	import { getCourses, getTeachers } from '$lib/api';
 	import DisplayCourses from './DisplayCourses.svelte';
 
-	let courses = [];
-	let teachers = [];
 	let orders = [];
 	let error = null;
 
@@ -17,6 +16,7 @@
 				return {
 					id: teacher.id,
 					name: teacher.teacherName,
+					description: teacher.teacherDescription,
 					email: teacher.teacherEmail
 				};
 			});
@@ -40,8 +40,10 @@
 				};
 			});
 
-			courses = mappedCourses;
-			teachers = mappedTeachers;
+			courses.set(mappedCourses);
+			console.log('Courses set in store:', mappedCourses);
+			teachers.set(mappedTeachers);
+			console.log(mappedTeachers);
 		} catch (err) {
 			error = err.message;
 		}
@@ -50,6 +52,4 @@
 
 {#if error}
 	<p>Error: {error}</p>
-{:else}
-	<DisplayCourses {courses} />
 {/if}

@@ -1,11 +1,25 @@
 <script>
-	export let courses = [];
+	import { courses } from '$lib/stores';
+	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
+
+	let allCourses = [];
+
+	onMount(() => {
+		const unsubscribe = courses.subscribe((value) => {
+			allCourses = value;
+		});
+
+		return () => {
+			unsubscribe();
+		};
+	});
 </script>
 
 <h2>Kursutbud</h2>
-{#if courses.length > 0}
+{#if allCourses.length > 0}
 	<div class="onlineCourses">
-		{#each courses as course}
+		{#each allCourses as course}
 			<div class="course">
 				<h3>{course.name}</h3>
 				<span><b>Kursbeskrivning:</b></span>

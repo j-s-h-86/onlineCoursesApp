@@ -1,5 +1,6 @@
 <script>
-	import LoadData from '$lib/components/LoadData.svelte';
+	import { courses } from '$lib/stores';
+	import DisplayCourses from '$lib/components/DisplayCourses.svelte';
 </script>
 
-<LoadData />
+<DisplayCourses />
