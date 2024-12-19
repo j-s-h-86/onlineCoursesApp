@@ -3,16 +3,15 @@
 
 <nav>
 	<ul>
-		<li><a href="/" use:link>Hem</a></li>
-		<li><a href="/courses" use:link>Kurser</a></li>
-		<li><a href="/teachers" use:link>Coacher</a></li>
-		<li><a href="/contact" use:link>Kontakt</a></li>
+		<li><a href="/">Hem</a></li>
+		<li><a href="/courses">Kurser</a></li>
+		<li><a href="/teachers">Coacher</a></li>
+		<li><a href="/contact">Kontakt</a></li>
 	</ul>
 </nav>
 
 <style>
 	nav {
-		background-color: #333;
 		padding: 10px;
 		/* position: fixed;
 		top: 0;
