@@ -1,8 +1,10 @@
 <script>
+	import Navigation from '$lib/components/Navigation.svelte';
 </script>
 
 <header>
 	<h2>Johans asgrymma onlinekurser</h2>
+	<Navigation />
 </header>
 
 <style>

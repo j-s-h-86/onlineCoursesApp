@@ -8,8 +8,11 @@
 		{#each courses as course}
 			<div class="course">
 				<h3>{course.name}</h3>
-				<p>{course.description}</p>
-				<p>{course.teacherName}</p>
+				<span><b>Kursbeskrivning:</b></span>
+				<span>{course.description}</span>
+				<p>Lärare: {course.teacherName}</p>
+				<p>Antal tillfällen: {course.occasions}</p>
+				<p>Pris: {course.price} SEK</p>
 			</div>
 		{/each}
 	</div>
@@ -20,18 +23,17 @@
 <style>
 	.onlineCourses {
 		width: 100%;
-		height: 100vh;
 		display: flex;
+		flex-wrap: wrap;
 		justify-content: space-evenly;
 	}
 
 	.course {
 		display: flex;
 		flex-direction: column;
-		justify-content: space-evenly;
 		text-align: center;
-		height: 300px;
-		width: 250px;
+		height: 400px;
+		width: 350px;
 		border: 1px solid black;
 		border-radius: 10%;
 	}
