@@ -23,7 +23,7 @@
 			<div class="coach">
 				<h3>{teacher.name}</h3>
 				<span><b>Information:</b></span>
-				<span>{teacher.teacherDescription}</span>
+				<span>{teacher.description}</span>
 			</div>
 		{/each}
 	</div>
