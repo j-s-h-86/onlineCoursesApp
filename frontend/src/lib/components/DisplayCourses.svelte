@@ -1,9 +1,14 @@
+<!-- src/lib/components/DisplayCourses.svelte -->
 <script>
-	import { courses } from '$lib/stores';
+	import PurchaseModal from './modals/purchaseModal.svelte';
+	import { modalStates, courses } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
+	import { postOrder } from '$lib/api';
 
 	let allCourses = [];
+	let purchaseModal = false;
+	let selectedCourse = null;
 
 	onMount(() => {
 		const unsubscribe = courses.subscribe((value) => {
@@ -13,6 +18,30 @@
 		return () => {
 			unsubscribe();
 		};
+	});
+
+	async function handlePurchase(courseId) {
+		try {
+			const result = await postOrder(courseId);
+			console.log('Order placed successfully:', result);
+		} catch (error) {
+			console.error('Failed to place order:', error);
+		}
+	}
+
+	function openPurchaseModal(course) {
+		selectedCourse = course;
+		console.log('Opening modal for course:', course);
+		modalStates.update((state) => {
+			console.log('Updating modal state to true');
+			return { ...state, purchaseModal: true };
+		});
+	}
+
+	modalStates.subscribe((state) => {
+		if (!state.purchaseModal) {
+			selectedCourse = null;
+		}
 	});
 </script>
 
@@ -27,11 +56,16 @@
 				<p>Lärare: {course.teacherName}</p>
 				<p>Antal tillfällen: {course.occasions}</p>
 				<p>Pris: {course.price} SEK</p>
+				<button on:click={() => openPurchaseModal(course)}>Köp kurs</button>
 			</div>
 		{/each}
 	</div>
 {:else}
 	<p>Inga tillgängliga kurser just nu.</p>
+{/if}
+
+{#if selectedCourse}
+	<PurchaseModal {selectedCourse} />
 {/if}
 
 <style>
