@@ -49,12 +49,28 @@ switch ($resource) {
 
     case 'orders':
         $orderModel = new Order($pdo);
-        if ($id) {
-            $data = $orderModel->getOrderById($id);
-            echo json_encode($data);
-        } else {
-            $orders = $orderModel->getAllOrders();
-            echo json_encode($orders);
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+            if ($id) {
+                $data = $orderModel->getOrderById($id);
+                echo json_encode($data);
+            } else {
+                $orders = $orderModel->getAllOrders();
+                echo json_encode($orders);
+            }
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $result = $orderModel->createOrder($input);
+                if ($result) {
+                    echo json_encode(["message" => "Order created successfully"]);
+                } else {
+                    header("HTTP/1.0 500 Internal Server Error");
+                    echo json_encode(["message" => "Failed to create order"]);
+                }
+            } else {
+                header("HTTP/1.0 400 Bad Request");
+                echo json_encode(["message" => "Invalid JSON input"]);
+            }
         }
         break;
 

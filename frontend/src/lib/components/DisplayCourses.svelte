@@ -1,4 +1,3 @@
-<!-- src/lib/components/DisplayCourses.svelte -->
 <script>
 	import PurchaseModal from './modals/purchaseModal.svelte';
 	import { modalStates, courses } from '$lib/stores';
@@ -19,15 +18,6 @@
 			unsubscribe();
 		};
 	});
-
-	async function handlePurchase(courseId) {
-		try {
-			const result = await postOrder(courseId);
-			console.log('Order placed successfully:', result);
-		} catch (error) {
-			console.error('Failed to place order:', error);
-		}
-	}
 
 	function openPurchaseModal(course) {
 		selectedCourse = course;

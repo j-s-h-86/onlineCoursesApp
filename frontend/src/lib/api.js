@@ -63,23 +63,22 @@ export async function getOrderById(id) {
 	return data;
 }
 
-export async function postOrder(id) {
+export async function postOrder(fullName, email, courseId) {
 	try {
-		const response = await fetch(`${baseURL}//orders`, {
+		const response = await fetch(`${baseURL}/orders`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ id })
+			body: JSON.stringify({ fullName, email, courseId })
 		});
-
 		if (!response.ok) {
-			throw new Error('Failed to place order');
+			throw new Error('Network response was not ok');
 		}
-
-		return await response.json();
+		const result = await response.json();
+		return result;
 	} catch (error) {
-		console.error(error);
+		console.error('Error placing order:', error);
 		throw error;
 	}
 }
