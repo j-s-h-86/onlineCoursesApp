@@ -74,6 +74,10 @@ switch ($resource) {
         }
         break;
 
+    case 'create-checkout-session':
+        require 'create-checkout-session.php';
+        break;
+
     default:
         header("HTTP/1.0 404 Not Found");
         echo json_encode(["message" => "Resource not found"]);

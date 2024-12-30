@@ -24,11 +24,23 @@ class Order
 
     public function createOrder($data)
     {
-        $stmt = $this->pdo->prepare('INSERT INTO orders (fullName, email, courseId) VALUES (:fullName, :email, :courseId)');
-        return $stmt->execute([
-            'fullName' => $data['fullName'],
-            'email' => $data['email'],
-            'courseId' => $data['courseId']
-        ]);
+        $stmt = $this->pdo->prepare('SELECT price FROM courses WHERE id = :courseId');
+        $stmt->execute(['courseId' => $data['courseId']]);
+        $course = $stmt->fetch();
+
+        if ($course) {
+            $price = $course['price'];
+
+            $stmt = $this->pdo->prepare('INSERT INTO orders (fullName, email, courseId, price) VALUES (:fullName, :email, :courseId, :price)');
+            return $stmt->execute([
+                'fullName' => $data['fullName'],
+                'email' => $data['email'],
+                'courseId' => $data['courseId'],
+                'price' => $price
+            ]);
+        }
+
+        return false;
     }
+
 }

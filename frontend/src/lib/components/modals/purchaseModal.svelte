@@ -1,6 +1,10 @@
 <script>
+	import { onMount } from 'svelte';
 	import { modalStates } from '$lib/stores';
 	import { postOrder } from '$lib/api';
+
+	const baseURL = import.meta.env.VITE_API_BASE_URL;
+	const stripeKey = import.meta.env.VITE_SPK;
 
 	export let selectedCourse;
 
@@ -8,6 +12,17 @@
 	let fullName = '';
 	let email = '';
 	let courseId = selectedCourse?.id || '';
+	let price = selectedCourse?.price || '';
+	let stripe;
+
+	onMount(() => {
+		const stripePublicKey = import.meta.env.VITE_STRIPE_PUBLIC_KEY;
+		if (!stripePublicKey) {
+			console.error('Stripe public key is not defined');
+			return;
+		}
+		stripe = Stripe(stripePublicKey);
+	});
 
 	$: if (dialog) {
 		console.log('Dialog element found');
@@ -28,10 +43,36 @@
 		dialog.close();
 	}
 
-	async function handlePurchase(fullName, email, courseId) {
+	async function handlePurchase(fullName, email, courseId, price) {
 		try {
-			const result = await postOrder(fullName, email, courseId);
-			console.log('Order placed successfully:', result);
+			const sessionResponse = await fetch(`${baseURL}/create-checkout-session`, {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					fullName,
+					email,
+					courseId,
+					price
+				})
+			});
+
+			const session = await sessionResponse.json();
+
+			if (!sessionResponse.ok) {
+				throw new Error('Failed to create Stripe Checkout session');
+			}
+
+			console.log('Stripe Checkout session created successfully:', session);
+
+			const result = await stripe.redirectToCheckout({
+				sessionId: session.id
+			});
+
+			if (result.error) {
+				console.error(result.error.message);
+			}
 		} catch (error) {
 			console.error('Failed to place order:', error);
 		}
@@ -39,10 +80,10 @@
 
 	async function handleSubmit(event) {
 		event.preventDefault();
-		const newOrder = { fullName, email, courseId };
+		const newOrder = { fullName, email, courseId, price };
 		console.log('Form data:', newOrder);
 
-		await handlePurchase(fullName, email, courseId);
+		await handlePurchase(fullName, email, courseId, price);
 
 		closeModal();
 	}

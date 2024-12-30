@@ -69,6 +69,7 @@ class DBContext
         `fullName` VARCHAR(255) NOT NULL,
         `email` VARCHAR(255) NOT NULL,
         `courseId` INT NOT NULL,
+        `price` DECIMAL(10, 2) NOT NULL,
         PRIMARY KEY (`id`),
         FOREIGN KEY (`courseId`) REFERENCES `courses`(`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
@@ -109,8 +110,8 @@ class DBContext
         $count = $stmt->fetchColumn();
 
         if ($count == 0) {
-            $sql = "INSERT INTO orders (fullName, email, courseId) VALUES
-                    ('Jovan Rajs', 'jovan.rajs@rattsmedicin.se', 1)";
+            $sql = "INSERT INTO orders (fullName, email, courseId, price) VALUES
+                    ('Jovan Rajs', 'jovan.rajs@rattsmedicin.se', 1, 2100.00)";
             $this->pdo->exec($sql);
         }
     }
