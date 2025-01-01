@@ -3,7 +3,6 @@
 	import { modalStates, courses } from '$lib/stores';
 	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
-	import { postOrder } from '$lib/api';
 
 	let allCourses = [];
 	let purchaseModal = false;

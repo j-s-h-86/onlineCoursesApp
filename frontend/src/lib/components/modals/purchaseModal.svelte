@@ -1,7 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
 	import { modalStates } from '$lib/stores';
-	import { postOrder } from '$lib/api';
 
 	const baseURL = import.meta.env.VITE_API_BASE_URL;
 	const stripeKey = import.meta.env.VITE_SPK;
