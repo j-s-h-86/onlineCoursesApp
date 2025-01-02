@@ -10,3 +10,5 @@ export const modalStates = writable({
 modalStates.subscribe((value) => {
 	console.log('modalStates updated:', value);
 });
+
+export const user = writable(null);

@@ -1,10 +1,18 @@
 <?php
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/userDatabase.php';
+
 
 class DBContext
 {
     private $pdo;
+    private $userDatabase;
+
+    function getUserDatabase()
+    {
+        return $this->userDatabase;
+    }
 
     public function __construct()
     {
@@ -21,6 +29,7 @@ class DBContext
             $this->pdo = new PDO($dsn, $user, $pass);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $this->pdo->exec("set names utf8mb4");
+            $this->userDatabase = new UserDatabase($this->pdo);
         } catch (PDOException $exception) {
             echo "Connection error: " . $exception->getMessage();
             die();
@@ -75,6 +84,10 @@ class DBContext
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
 
         $this->pdo->exec($sql);
+
+        $this->userDatabase->setupUsers();
+        $this->userDatabase->seedUsers();
+
 
         $initialized = true;
     }

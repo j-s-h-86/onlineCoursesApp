@@ -7,6 +7,7 @@
 		<li><a href="/courses">Kurser</a></li>
 		<li><a href="/teachers">Coacher</a></li>
 		<li><a href="/contact">Kontakt</a></li>
+		<li><a href="/login">Admin</a></li>
 	</ul>
 </nav>
 
