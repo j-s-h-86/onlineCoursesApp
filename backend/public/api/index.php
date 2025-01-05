@@ -112,31 +112,83 @@ switch ($resource) {
 
     case 'teachers':
         $teacherModel = new Teacher($pdo);
-        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-            if ($id) {
-                $data = $teacherModel->getTeacherById($id);
-                echo json_encode($data);
-            } else {
-                $teachers = $teacherModel->getAllTeachers();
-                echo json_encode($teachers);
-            }
-        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $input = json_decode(file_get_contents('php://input'), true);
-            if (json_last_error() === JSON_ERROR_NONE) {
-                $result = $teacherModel->addTeacher($input);
-                if ($result) {
-                    echo json_encode(["message" => "Teacher added successfully"]);
+        header("Content-Type: application/json");
+
+        switch ($_SERVER['REQUEST_METHOD']) {
+            case 'GET':
+                if ($id) {
+                    $data = $teacherModel->getTeacherById($id);
+                    if ($data) {
+                        echo json_encode($data);
+                    } else {
+                        http_response_code(404);
+                        echo json_encode(["message" => "Teacher not found"]);
+                    }
                 } else {
-                    header("HTTP/1.0 500 Internal Server Error");
-                    echo json_encode(["message" => "Failed to add teacher"]);
+                    $teacher = $teacherModel->getAllTeachers();
+                    echo json_encode($teacher);
                 }
-            } else {
-                header("HTTP/1.0 400 Bad Request");
-                echo json_encode(["message" => "Invalid JSON input"]);
-            }
-        } else {
-            header("HTTP/1.0 405 Method Not Allowed");
-            echo json_encode(["message" => "Method not allowed"]);
+                break;
+
+            case 'POST':
+                $input = json_decode(file_get_contents('php://input'), true);
+                if (json_last_error() === JSON_ERROR_NONE) {
+                    $result = $teacherModel->addTeacher($input);
+                    if ($result) {
+                        http_response_code(201);
+                        echo json_encode(["message" => "Teacher added successfully"]);
+                    } else {
+                        http_response_code(500);
+                        echo json_encode(["message" => "Failed to add teacher"]);
+                    }
+                } else {
+                    http_response_code(400);
+                    echo json_encode(["message" => "Invalid JSON input"]);
+                }
+                break;
+
+            case 'PUT':
+                if (!$id) {
+                    http_response_code(400);
+                    echo json_encode(["message" => "Missing teacher ID"]);
+                    break;
+                }
+
+                $input = json_decode(file_get_contents('php://input'), true);
+                if (json_last_error() === JSON_ERROR_NONE) {
+                    $result = $teacherModel->updateTeacher($id, $input);
+                    if ($result) {
+                        echo json_encode(["message" => "Teacher updated successfully"]);
+                    } else {
+                        http_response_code(404);
+                        echo json_encode(["message" => "Teacher not found"]);
+                    }
+                } else {
+                    http_response_code(400);
+                    echo json_encode(["message" => "Invalid JSON input"]);
+                }
+                break;
+
+            case 'DELETE':
+                if (!$id) {
+                    http_response_code(400);
+                    echo json_encode(["message" => "Missing teacher ID"]);
+                    break;
+                }
+
+                $result = $teacherModel->deleteTeacher($id);
+                if ($result) {
+                    echo json_encode(["message" => "Teacher deleted successfully"]);
+                } else {
+                    http_response_code(404);
+                    echo json_encode(["message" => "Teacher not found"]);
+                }
+                break;
+
+            default:
+                http_response_code(405);
+                echo json_encode(["message" => "Method not allowed"]);
+                break;
         }
         break;
 

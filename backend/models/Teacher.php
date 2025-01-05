@@ -29,8 +29,27 @@ class Teacher
         return $stmt->execute([
             ':teacherName' => $data['teacherName'],
             ':teacherDescription' => $data['teacherDescription'],
-            'teacherEmail' => $data['teacherEmail']
+            ':teacherEmail' => $data['teacherEmail']
         ]);
+    }
+
+    public function updateTeacher($id, $data)
+    {
+        $query = "UPDATE teachers SET teacherName = :teacherName, teacherDescription = :teacherDescription, teacherEmail = :teacherEmail WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([
+            ':id' => $id,
+            ':teacherName' => $data['teacherName'],
+            ':teacherDescription' => $data['teacherDescription'],
+            ':teacherEmail' => $data['teacherEmail']
+        ]);
+    }
+
+    public function deleteTeacher($id)
+    {
+        $query = "DELETE FROM teachers WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([':id' => $id]);
     }
 
 }
