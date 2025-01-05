@@ -38,6 +38,20 @@ switch ($resource) {
                 $courses = $courseModel->getAllCourses();
                 echo json_encode($courses);
             }
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $result = $courseModel->addCourse($input);
+                if ($result) {
+                    echo json_encode(["message" => "Course added successfully"]);
+                } else {
+                    header("HTTP/1.0 500 Internal Server Error");
+                    echo json_encode(["message" => "Failed to add course"]);
+                }
+            } else {
+                header("HTTP/1.0 400 Bad Request");
+                echo json_encode(["message" => "Invalid JSON input"]);
+            }
         } else {
             header("HTTP/1.0 405 Method Not Allowed");
             echo json_encode(["message" => "Method not allowed"]);
@@ -53,6 +67,20 @@ switch ($resource) {
             } else {
                 $teachers = $teacherModel->getAllTeachers();
                 echo json_encode($teachers);
+            }
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $input = json_decode(file_get_contents('php://input'), true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $result = $teacherModel->addTeacher($input);
+                if ($result) {
+                    echo json_encode(["message" => "Teacher added successfully"]);
+                } else {
+                    header("HTTP/1.0 500 Internal Server Error");
+                    echo json_encode(["message" => "Failed to add teacher"]);
+                }
+            } else {
+                header("HTTP/1.0 400 Bad Request");
+                echo json_encode(["message" => "Invalid JSON input"]);
             }
         } else {
             header("HTTP/1.0 405 Method Not Allowed");

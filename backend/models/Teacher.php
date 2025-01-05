@@ -21,4 +21,17 @@ class Teacher
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function addTeacher($data)
+    {
+        $query = "INSERT INTO teachers (teacherName, teacherDescription, teacherEmail) VALUES (:teacherName, :teacherDescription, :teacherEmail)";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([
+            ':teacherName' => $data['teacherName'],
+            ':teacherDescription' => $data['teacherDescription'],
+            'teacherEmail' => $data['teacherEmail']
+        ]);
+    }
+
 }
+

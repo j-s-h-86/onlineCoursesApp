@@ -21,4 +21,17 @@ class Course
         $stmt->execute(['id' => $id]);
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
+
+    public function addCourse($data)
+    {
+        $query = "INSERT INTO courses (courseName, courseDescription, teacherId, occasions, price) VALUES (:courseName, :courseDescription, :teacherId, :occasions, :price)";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([
+            ':courseName' => $data['courseName'],
+            ':courseDescription' => $data['courseDescription'],
+            'teacherId' => $data['teacherId'],
+            'occasions' => $data['occasions'],
+            'price' => $data['price']
+        ]);
+    }
 }
