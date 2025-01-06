@@ -1,3 +1,7 @@
+import { courses } from './stores';
+import { teachers } from './stores';
+import { orders } from './stores';
+
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
 export async function getCourses() {
@@ -6,7 +10,7 @@ export async function getCourses() {
 		throw new Error(`Error fetching courses: ${response.statusText}`);
 	}
 	const data = await response.json();
-	return data;
+	courses.set(data);
 }
 
 export async function getCourseById(id) {
@@ -21,13 +25,37 @@ export async function getCourseById(id) {
 	return data;
 }
 
+export async function deleteCourse(id) {
+	const response = await fetch(`${baseURL}/courses/${id}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	if (!response.ok) {
+		console.error(`Error deleting course: ${response.statusText}`);
+		throw new Error(`Error deleting course: ${response.statusText}`);
+	}
+
+	const result = await response.json();
+	console.log('Delete course result:', result);
+
+	if (result.message === 'Course deleted successfully') {
+		alert('Kursen har raderats!');
+	} else {
+		console.error('Error: Course not deleted', result);
+		alert('Det gick inte att radera kursen');
+	}
+}
+
 export async function getTeachers() {
 	const response = await fetch(`${baseURL}/teachers`);
 	if (!response.ok) {
 		throw new Error(`Error fetching teachers: ${response.statusText}`);
 	}
 	const data = await response.json();
-	return data;
+	teachers.set(data);
 }
 
 export async function getTeacherById(id) {
@@ -48,7 +76,7 @@ export async function getOrders() {
 		throw new Error(`Error fetching orders: ${response.statusText}`);
 	}
 	const data = await response.json();
-	return data;
+	orders.set(data);
 }
 
 export async function getOrderById(id) {

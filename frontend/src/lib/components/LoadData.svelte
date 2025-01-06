@@ -1,5 +1,6 @@
 <script>
 	import { onMount } from 'svelte';
+	import { get } from 'svelte/store';
 	import { courses, teachers } from '$lib/stores';
 	import { getCourses, getTeachers } from '$lib/api';
 	import DisplayCourses from './DisplayCourses.svelte';
@@ -9,8 +10,8 @@
 
 	onMount(async () => {
 		try {
-			const teachersData = await getTeachers();
-			console.log('Teachers Data:', teachersData);
+			await getTeachers();
+			const teachersData = get(teachers);
 
 			const mappedTeachers = teachersData.map((teacher) => {
 				return {
@@ -26,7 +27,8 @@
 				return map;
 			}, {});
 
-			const coursesData = await getCourses();
+			await getCourses();
+			const coursesData = get(courses);
 			console.log('Courses Data:', coursesData);
 
 			const mappedCourses = coursesData.map((course) => {

@@ -1,0 +1,63 @@
+<script>
+	import DeleteCourse from '../CRUD/DeleteCourse.svelte';
+
+	export let url;
+
+	let courseName = '';
+	let courseDescription = '';
+	let teacherId = '';
+	let occasions = '';
+	let price = '';
+
+	async function addNewCourse() {
+		const courseData = {
+			courseName,
+			courseDescription,
+			teacherId: parseInt(teacherId),
+			occasions: parseInt(occasions),
+			price: parseFloat(price)
+		};
+
+		try {
+			const response = await fetch(url, {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(courseData)
+			});
+			const result = await response.json();
+			alert(result.message || 'Course added successfully!');
+		} catch (error) {
+			console.error('Error submitting course:', error);
+		}
+	}
+</script>
+
+<form on:submit|preventDefault={addNewCourse}>
+	<div>
+		<label for="courseName">Kursnamn:</label>
+		<input type="text" id="courseName" bind:value={courseName} required />
+	</div>
+
+	<div>
+		<label for="courseDescription">Beskrivning:</label>
+		<textarea id="courseDescription" bind:value={courseDescription} required></textarea>
+	</div>
+
+	<div>
+		<label for="teacherId">Lärare (ID):</label>
+		<input type="number" id="teacherId" bind:value={teacherId} required />
+	</div>
+
+	<div>
+		<label for="occasions">Antal tillfällen:</label>
+		<input type="number" id="occasions" bind:value={occasions} required />
+	</div>
+
+	<div>
+		<label for="price">Pris:</label>
+		<input type="number" id="price" step="0.01" bind:value={price} required />
+	</div>
+
+	<button type="submit">Lägg till kurs</button>
+</form>
+<DeleteCourse />

@@ -100,8 +100,9 @@ class DBContext
 
         if ($count == 0) {
             $sql = "INSERT INTO teachers (teacherName, teacherDescription, teacherEmail) VALUES
-                    ('Johan Hammarstedt', 'Mångsysslare som sadlat om till livscoach och föreläsare. Expert på att skapa dålig stämning.', 'johan@onlinecourses.com'),
-                    ('Drottning Isabitch', 'Bortskämd tandläkare som blev av med jobbet för att hon okynnesborrade i folks tänder.', 'isabitch@onlinecourses.com')";
+                    ('Johan Hammarstedt', 'Mångsysslare som sadlat om till livscoach och föreläsare.', 'johan@onlinecourses.com'),
+                    ('Anders Glennmark', 'Var oslagbar och hade svaren på allt.', 'glennis@onlinecourses.com'),
+                    ('Orup', 'Blir hellre jagad av vargar.', 'orup@onlinecourses.com')";
             $this->pdo->exec($sql);
         }
 
@@ -113,8 +114,8 @@ class DBContext
             $sql = "INSERT INTO courses (courseName, courseDescription, teacherId, occasions, price) VALUES
                       ('Dålig stämning', 'Grundkurs i att skapa dålig stämning var du än befinner dig.', 1, 9, 2100.00),
                       ('Mer dålig stämning', 'Påbyggnadskurs.', 1, 4, 1500.00),
-                      ('Att vara en översittare', 'Tips och trix för att verka bättre än andra.', 2, 6, 1500.00),
-                      ('Hur man lurar till sig gratis drinkar på krogen och annat nyttigt', 'Den ultimata guiden för nittiotalist-tjejerna.', 2, 8, 1999.00)";
+                      ('Gräv guld i USA', 'Många försökte och försvann. Bevisa att du kan.', 2, 6, 1500.00),
+                      ('Rör inte min Mercedes', 'Bilvård.', 3, 8, 1999.00)";
             $this->pdo->exec($sql);
         }
 
@@ -124,7 +125,8 @@ class DBContext
 
         if ($count == 0) {
             $sql = "INSERT INTO orders (fullName, email, courseId, price) VALUES
-                    ('Jovan Rajs', 'jovan.rajs@rattsmedicin.se', 1, 2100.00)";
+                    ('Jovan Rajs', 'jovan.rajs@rattsmedicin.se', 1, 2100.00),
+                    ('Göran Greider', 'goran@skvallerpress.se', 3, 1500.00)";
             $this->pdo->exec($sql);
         }
     }
