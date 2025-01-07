@@ -16,6 +16,7 @@
 		justify-content: space-evenly;
 		align-items: center;
 		border-bottom: 1px solid #ffb764;
+		padding: 10px;
 	}
 
 	h2 {

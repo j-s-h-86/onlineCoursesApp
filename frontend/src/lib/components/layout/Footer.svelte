@@ -8,5 +8,6 @@
 <style>
 	footer {
 		margin-bottom: 0;
+		padding: 10px;
 	}
 </style>

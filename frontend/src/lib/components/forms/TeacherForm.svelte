@@ -1,4 +1,6 @@
 <script>
+	import DeleteTeacher from '../CRUD/DeleteTeacher.svelte';
+
 	export let url;
 
 	let teacherName = '';
@@ -44,3 +46,4 @@
 
 	<button type="submit">Lägg till lärare</button>
 </form>
+<DeleteTeacher />

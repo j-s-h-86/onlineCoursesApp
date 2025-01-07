@@ -1,9 +1,14 @@
 <script>
+	import { onMount } from 'svelte';
 	import { get } from 'svelte/store';
 	import { courses } from '$lib/stores';
-	import { deleteCourse } from '$lib/api';
+	import { deleteCourse, getCourses } from '$lib/api';
 
 	let selectedCourseId = '';
+
+	onMount(async () => {
+		await getCourses();
+	});
 
 	async function handleDelete() {
 		if (selectedCourseId) {

@@ -70,6 +70,30 @@ export async function getTeacherById(id) {
 	return data;
 }
 
+export async function deleteTeacher(id) {
+	const response = await fetch(`${baseURL}/teachers/${id}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	if (!response.ok) {
+		console.error(`Error deleting teacher: ${response.statusText}`);
+		throw new Error(`Error deleting teacher: ${response.statusText}`);
+	}
+
+	const result = await response.json();
+	console.log('Delete teacher result:', result);
+
+	if (result.message === 'Teacher deleted successfully') {
+		alert('Coachen har tagits bort!');
+	} else {
+		console.error('Error: Teacher not deleted', result);
+		alert('Det gick inte att radera coachen');
+	}
+}
+
 export async function getOrders() {
 	const response = await fetch(`${baseURL}/orders`);
 	if (!response.ok) {

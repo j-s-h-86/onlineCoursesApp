@@ -32,32 +32,39 @@
 	}
 </script>
 
-<form on:submit|preventDefault={addNewCourse}>
-	<div>
-		<label for="courseName">Kursnamn:</label>
-		<input type="text" id="courseName" bind:value={courseName} required />
-	</div>
+<div class="courseForm">
+	<form on:submit|preventDefault={addNewCourse}>
+		<div>
+			<label for="courseName">Kursnamn:</label>
+			<input type="text" id="courseName" bind:value={courseName} required />
+		</div>
 
-	<div>
-		<label for="courseDescription">Beskrivning:</label>
-		<textarea id="courseDescription" bind:value={courseDescription} required></textarea>
-	</div>
+		<div>
+			<label for="courseDescription">Beskrivning:</label>
+			<textarea id="courseDescription" bind:value={courseDescription} required></textarea>
+		</div>
 
-	<div>
-		<label for="teacherId">Lärare (ID):</label>
-		<input type="number" id="teacherId" bind:value={teacherId} required />
-	</div>
+		<div>
+			<label for="teacherId">Lärare (ID):</label>
+			<input type="number" id="teacherId" bind:value={teacherId} required />
+		</div>
 
-	<div>
-		<label for="occasions">Antal tillfällen:</label>
-		<input type="number" id="occasions" bind:value={occasions} required />
-	</div>
+		<div>
+			<label for="occasions">Antal tillfällen:</label>
+			<input type="number" id="occasions" bind:value={occasions} required />
+		</div>
 
-	<div>
-		<label for="price">Pris:</label>
-		<input type="number" id="price" step="0.01" bind:value={price} required />
-	</div>
+		<div>
+			<label for="price">Pris:</label>
+			<input type="number" id="price" step="0.01" bind:value={price} required />
+		</div>
 
-	<button type="submit">Lägg till kurs</button>
-</form>
-<DeleteCourse />
+		<button type="submit">Lägg till kurs</button>
+	</form>
+</div>
+
+<div class="updateCourse"></div>
+
+<div class="deleteComponent">
+	<DeleteCourse />
+</div>

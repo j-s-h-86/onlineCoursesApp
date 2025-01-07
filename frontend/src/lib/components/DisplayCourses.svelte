@@ -45,7 +45,7 @@
 				<p>Lärare: {course.teacherName}</p>
 				<p>Antal tillfällen: {course.occasions}</p>
 				<p>Pris: {course.price} SEK</p>
-				<button on:click={() => openPurchaseModal(course)}>Köp kurs</button>
+				<button class="purchaseButton" on:click={() => openPurchaseModal(course)}>Köp kurs</button>
 			</div>
 		{/each}
 	</div>
@@ -63,15 +63,26 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-evenly;
+		background-color: #3a424a;
 	}
 
 	.course {
 		display: flex;
 		flex-direction: column;
+		align-items: center;
 		text-align: center;
 		height: 400px;
 		width: 350px;
 		border: 1px solid black;
 		border-radius: 10%;
+		margin: 20px;
+		background-color: #595e61;
+	}
+
+	.purchaseButton {
+		width: 75px;
+		height: 35px;
+		background-color: #3a424a;
+		color: #ffb764;
 	}
 </style>

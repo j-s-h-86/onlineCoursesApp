@@ -12,4 +12,8 @@
 <Footer />
 
 <style>
+	main {
+		background-color: #3a424a;
+		padding: 10px;
+	}
 </style>
