@@ -55,6 +55,7 @@ class DBContext
             `teacherName` VARCHAR(200) NOT NULL,
             `teacherDescription` VARCHAR(1000) NOT NULL,
             `teacherEmail` VARCHAR(200) NOT NULL,
+            `teacherImg` VARCHAR(200) NOT NULL,
             PRIMARY KEY (`id`)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
 
@@ -99,10 +100,10 @@ class DBContext
         $count = $stmt->fetchColumn();
 
         if ($count == 0) {
-            $sql = "INSERT INTO teachers (teacherName, teacherDescription, teacherEmail) VALUES
-                    ('Johan Hammarstedt', 'Mångsysslare som sadlat om till livscoach och föreläsare.', 'johan@onlinecourses.com'),
-                    ('Anders Glennmark', 'Var oslagbar och hade svaren på allt.', 'glennis@onlinecourses.com'),
-                    ('Orup', 'Blir hellre jagad av vargar.', 'orup@onlinecourses.com')";
+            $sql = "INSERT INTO teachers (teacherName, teacherDescription, teacherEmail, teacherImg) VALUES
+                    ('Johan Hammarstedt', 'Mångsysslare som sadlat om till livscoach och föreläsare.', 'johan@onlinecourses.com', 'http://localhost:8000/backend/assets/johan.jpg'),
+                    ('Anders Glennmark', 'Var oslagbar och hade svaren på allt.', 'glennis@onlinecourses.com', 'http://localhost:8000/backend/assets/glennis.jpg'),
+                    ('Orup', 'Blir hellre jagad av vargar.', 'orup@onlinecourses.com', 'http://localhost:8000/backend/assets/orup.jpg')";
             $this->pdo->exec($sql);
         }
 

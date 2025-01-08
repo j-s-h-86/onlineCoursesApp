@@ -24,24 +24,26 @@ class Teacher
 
     public function addTeacher($data)
     {
-        $query = "INSERT INTO teachers (teacherName, teacherDescription, teacherEmail) VALUES (:teacherName, :teacherDescription, :teacherEmail)";
+        $query = "INSERT INTO teachers (teacherName, teacherDescription, teacherEmail, teacherImg) VALUES (:teacherName, :teacherDescription, :teacherEmail, :teacherImg)";
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute([
             ':teacherName' => $data['teacherName'],
             ':teacherDescription' => $data['teacherDescription'],
-            ':teacherEmail' => $data['teacherEmail']
+            ':teacherEmail' => $data['teacherEmail'],
+            ':teacherImg' => $data['teacherImg']
         ]);
     }
 
     public function updateTeacher($id, $data)
     {
-        $query = "UPDATE teachers SET teacherName = :teacherName, teacherDescription = :teacherDescription, teacherEmail = :teacherEmail WHERE id = :id";
+        $query = "UPDATE teachers SET teacherName = :teacherName, teacherDescription = :teacherDescription, teacherEmail = :teacherEmail, teacherImg = :teacherImg WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute([
             ':id' => $id,
             ':teacherName' => $data['teacherName'],
             ':teacherDescription' => $data['teacherDescription'],
-            ':teacherEmail' => $data['teacherEmail']
+            ':teacherEmail' => $data['teacherEmail'],
+            ':teacherImg' => $data['teacherImg']
         ]);
     }
 

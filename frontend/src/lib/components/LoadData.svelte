@@ -18,7 +18,8 @@
 					id: teacher.id,
 					name: teacher.teacherName,
 					description: teacher.teacherDescription,
-					email: teacher.teacherEmail
+					email: teacher.teacherEmail,
+					img: teacher.teacherImg
 				};
 			});
 

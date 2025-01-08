@@ -22,6 +22,9 @@
 		{#each allTeachers as teacher}
 			<div class="coach">
 				<h3>{teacher.name}</h3>
+				<div class="teacherImgContainer">
+					<img src={teacher.img} alt="coach" />
+				</div>
 				<span><b>Information:</b></span>
 				<span>{teacher.description}</span>
 			</div>
@@ -47,5 +50,15 @@
 		width: 350px;
 		border: 1px solid black;
 		border-radius: 10%;
+	}
+
+	.teacherImgContainer {
+		height: 200px;
+		width: auto;
+	}
+
+	img {
+		height: 100%;
+		width: auto;
 	}
 </style>

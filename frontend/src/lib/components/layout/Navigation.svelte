@@ -34,7 +34,7 @@
 	}
 
 	a {
-		color: white;
+		color: #ffb764;
 		text-decoration: none;
 		font-size: 16px;
 		padding: 10px;
