@@ -2,7 +2,9 @@
 </script>
 
 <footer>
-	<p>&copy; {new Date().getFullYear()} Mitt Företag. Alla rättigheter förbehållna.</p>
+	<p>
+		&copy; {new Date().getFullYear()} Johans asgrymma onlinekurser. Alla rättigheter förbehållna.
+	</p>
 </footer>
 
 <style>
