@@ -101,7 +101,7 @@ class DBContext
 
         if ($count == 0) {
             $sql = "INSERT INTO teachers (teacherName, teacherDescription, teacherEmail, teacherImg) VALUES
-                    ('Johan Hammarstedt', 'Mångsysslare som sadlat om till livscoach och föreläsare.', 'johan@onlinecourses.com', 'http://localhost:8000/backend/assets/johan.jpg'),
+                    ('Johan Hammarstedt', 'Jag är ingen alfahanne, Honey. Så du kan sitta längst fram i taxin.', 'johan@onlinecourses.com', 'http://localhost:8000/backend/assets/johan.jpg'),
                     ('Anders Glennmark', 'Var oslagbar och hade svaren på allt.', 'glennis@onlinecourses.com', 'http://localhost:8000/backend/assets/glennis.jpg'),
                     ('Orup', 'Blir hellre jagad av vargar.', 'orup@onlinecourses.com', 'http://localhost:8000/backend/assets/orup.jpg')";
             $this->pdo->exec($sql);
@@ -113,9 +113,8 @@ class DBContext
 
         if ($count == 0) {
             $sql = "INSERT INTO courses (courseName, courseDescription, teacherId, occasions, price) VALUES
-                      ('Dålig stämning', 'Grundkurs i att skapa dålig stämning var du än befinner dig.', 1, 9, 2100.00),
-                      ('Mer dålig stämning', 'Påbyggnadskurs.', 1, 4, 1500.00),
-                      ('Gräv guld i USA', 'Många försökte och försvann. Bevisa att du kan.', 2, 6, 1500.00),
+                      ('Dålig stämning', 'Skapa dålig stämning, var du än befinner dig.', 1, 9, 2100.00),
+                      ('Gräv guld i USA', 'Många försökte och försvann. Bevisa att du kan.', 2, 6, 1800.00),
                       ('Rör inte min Mercedes', 'Bilvård.', 3, 8, 1999.00)";
             $this->pdo->exec($sql);
         }

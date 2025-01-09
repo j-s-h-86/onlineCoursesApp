@@ -25,8 +25,10 @@
 				<div class="teacherImgContainer">
 					<img src={teacher.img} alt="coach" />
 				</div>
-				<span><b>Information:</b></span>
-				<span>{teacher.description}</span>
+				<div>
+					<p><b>Information:</b></p>
+					<p>{teacher.description}</p>
+				</div>
 			</div>
 		{/each}
 	</div>
@@ -45,6 +47,7 @@
 	.coach {
 		display: flex;
 		flex-direction: column;
+		justify-content: space-evenly;
 		text-align: center;
 		height: 400px;
 		width: 350px;

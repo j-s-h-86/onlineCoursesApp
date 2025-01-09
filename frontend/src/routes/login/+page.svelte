@@ -1,6 +1,7 @@
 <script>
 	import { user } from '$lib/stores';
-	import UserLogin from '$lib/components/forms/loginForm.svelte';
+	import LoginForm from '$lib/components/forms/LoginForm.svelte';
 </script>
 
-<UserLogin />
+<h2>Admin login</h2>
+<LoginForm />
