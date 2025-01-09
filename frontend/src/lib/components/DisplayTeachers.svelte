@@ -16,14 +16,14 @@
 	});
 </script>
 
-<h2>Våra coacher</h2>
+<h2>Våra lärare</h2>
 {#if allTeachers.length > 0}
-	<div class="onlineCoaches">
+	<div class="onlineTeachers">
 		{#each allTeachers as teacher}
-			<div class="coach">
+			<div class="teacher">
 				<h3>{teacher.name}</h3>
 				<div class="teacherImgContainer">
-					<img src={teacher.img} alt="coach" />
+					<img src={teacher.img} alt="teacher" />
 				</div>
 				<div>
 					<p><b>Information:</b></p>
@@ -33,18 +33,18 @@
 		{/each}
 	</div>
 {:else}
-	<p>Inga coacher anställda just nu.</p>
+	<p>Inga lärare anställda just nu.</p>
 {/if}
 
 <style>
-	.onlineCoaches {
+	.onlineTeachers {
 		width: 100%;
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: space-evenly;
 	}
 
-	.coach {
+	.teacher {
 		display: flex;
 		flex-direction: column;
 		justify-content: space-evenly;

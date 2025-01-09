@@ -6,12 +6,14 @@
 	let teacherName = '';
 	let teacherDescription = '';
 	let teacherEmail = '';
+	let teacherImg = '';
 
 	async function addNewTeacher() {
 		const teacherData = {
 			teacherName,
 			teacherDescription,
-			teacherEmail
+			teacherEmail,
+			teacherImg
 		};
 
 		try {
@@ -42,6 +44,11 @@
 	<div>
 		<label for="teacherEmail">Lärares epost:</label>
 		<input type="text" id="teacherEmail" bind:value={teacherEmail} required />
+	</div>
+
+	<div>
+		<label for="teacherImg">Lärarbild:</label>
+		<input type="text" id="teacherImg" bind:value={teacherImg} required />
 	</div>
 
 	<button type="submit">Lägg till lärare</button>

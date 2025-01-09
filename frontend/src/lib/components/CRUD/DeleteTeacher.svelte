@@ -17,15 +17,15 @@
 				await deleteTeacher(selectedTeacherId);
 			}
 		} else {
-			alert('Vänligen välj en kurs att radera');
+			alert('Vänligen välj en lärare att radera');
 		}
 	}
 </script>
 
 <div>
-	<label for="teacherId">Välj en coach att ta bort:</label>
+	<label for="teacherId">Välj en lärare att ta bort:</label>
 	<select id="teacherId" bind:value={selectedTeacherId}>
-		<option value="" disabled selected>Välj en coach...</option>
+		<option value="" disabled selected>Välj en lärare...</option>
 		{#each $teachers as teacher}
 			<option value={teacher.id}>{teacher.teacherName}</option>
 		{/each}

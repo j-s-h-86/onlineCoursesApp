@@ -3,9 +3,9 @@
 	import { user } from '../../lib/stores';
 	import { courses } from '../../lib/stores';
 	import { teachers } from '../../lib/stores';
-	import CourseForm from '$lib/components/forms/CourseForm.svelte';
-	import TeacherForm from '$lib/components/forms/TeacherForm.svelte';
-	import OrderForm from '$lib/components/forms/OrderForm.svelte';
+	import AddCourse from '$lib/components/forms/AddCourse.svelte';
+	import AddTeacher from '$lib/components/forms/AddTeacher.svelte';
+	import AddOrder from '$lib/components/forms/AddOrder.svelte';
 
 	const baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -46,11 +46,11 @@
 	</select>
 
 	{#if selectedEndpoint && selectedEndpoint.label === 'Courses'}
-		<CourseForm url={selectedEndpoint.url} />
+		<AddCourse url={selectedEndpoint.url} />
 	{:else if selectedEndpoint && selectedEndpoint.label === 'Teachers'}
-		<TeacherForm url={selectedEndpoint.url} />
+		<AddTeacher url={selectedEndpoint.url} />
 	{:else if selectedEndpoint && selectedEndpoint.label === 'Orders'}
-		<OrderForm url={selectedEndpoint.url} />
+		<AddOrder url={selectedEndpoint.url} />
 	{/if}
 	<br />
 	<button on:click={logoutFunction}>Log out</button>
