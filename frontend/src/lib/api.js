@@ -25,6 +25,22 @@ export async function getCourseById(id) {
 	return data;
 }
 
+export async function updateCourse(id, updatedData) {
+	const response = await fetch(`${baseURL}/courses/${id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(updatedData)
+	});
+
+	if (!response.ok) {
+		throw new Error(`Failed to update course: ${response.statusText}`);
+	}
+
+	return await response.json();
+}
+
 export async function deleteCourse(id) {
 	const response = await fetch(`${baseURL}/courses/${id}`, {
 		method: 'DELETE',
@@ -68,6 +84,22 @@ export async function getTeacherById(id) {
 	}
 	const data = await response.json();
 	return data;
+}
+
+export async function updateTeacher(id, updatedData) {
+	const response = await fetch(`${baseURL}/teachers/${id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(updatedData)
+	});
+
+	if (!response.ok) {
+		throw new Error(`Failed to update teacher: ${response.statusText}`);
+	}
+
+	return await response.json();
 }
 
 export async function deleteTeacher(id) {

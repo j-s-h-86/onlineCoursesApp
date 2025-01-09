@@ -6,6 +6,8 @@
 	import AddCourse from '$lib/components/forms/AddCourse.svelte';
 	import AddTeacher from '$lib/components/forms/AddTeacher.svelte';
 	import AddOrder from '$lib/components/forms/AddOrder.svelte';
+	import UpdateCourse from '$lib/components/CRUD/UpdateCourse.svelte';
+	import DeleteCourse from '$lib/components/CRUD/DeleteCourse.svelte';
 
 	const baseURL = import.meta.env.VITE_API_BASE_URL;
 
@@ -46,7 +48,11 @@
 	</select>
 
 	{#if selectedEndpoint && selectedEndpoint.label === 'Courses'}
-		<AddCourse url={selectedEndpoint.url} />
+		<div>
+			<AddCourse url={selectedEndpoint.url} />
+			<UpdateCourse />
+			<DeleteCourse />
+		</div>
 	{:else if selectedEndpoint && selectedEndpoint.label === 'Teachers'}
 		<AddTeacher url={selectedEndpoint.url} />
 	{:else if selectedEndpoint && selectedEndpoint.label === 'Orders'}
@@ -55,3 +61,10 @@
 	<br />
 	<button on:click={logoutFunction}>Log out</button>
 </main>
+
+<style>
+	div {
+		display: flex;
+		justify-content: space-evenly;
+	}
+</style>

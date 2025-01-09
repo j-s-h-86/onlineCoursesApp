@@ -30,6 +30,5 @@
 			<option value={course.id}>{course.courseName}</option>
 		{/each}
 	</select>
+	<button on:click={handleDelete}>Radera kurs</button>
 </div>
-
-<button on:click={handleDelete}>Radera kurs</button>

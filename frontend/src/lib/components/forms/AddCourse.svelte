@@ -62,9 +62,3 @@
 		<button type="submit">Lägg till kurs</button>
 	</form>
 </div>
-
-<div class="updateCourse"></div>
-
-<div class="deleteComponent">
-	<DeleteCourse />
-</div>
