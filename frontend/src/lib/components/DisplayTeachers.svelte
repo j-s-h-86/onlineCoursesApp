@@ -53,6 +53,7 @@
 		width: 350px;
 		border: 1px solid black;
 		border-radius: 10%;
+		background-color: #595e61;
 	}
 
 	.teacherImgContainer {

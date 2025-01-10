@@ -22,5 +22,6 @@
 	main {
 		background-color: #3a424a;
 		padding: 10px;
+		min-height: 100%;
 	}
 </style>

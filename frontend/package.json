@@ -19,5 +19,7 @@
 		"svelte": "^5.0.0",
 		"svelte-preprocess": "^6.0.3",
 		"vite": "^6.0.0"
+	},
+	"dependencies": {
 	}
 }

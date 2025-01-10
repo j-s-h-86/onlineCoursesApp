@@ -3,9 +3,9 @@
 	import { user } from '../../lib/stores';
 	import { courses } from '../../lib/stores';
 	import { teachers } from '../../lib/stores';
-	import AddCourse from '$lib/components/forms/AddCourse.svelte';
-	import AddTeacher from '$lib/components/forms/AddTeacher.svelte';
-	import AddOrder from '$lib/components/forms/AddOrder.svelte';
+	import AddCourse from '$lib/components/CRUD/AddCourse.svelte';
+	import AddTeacher from '$lib/components/CRUD/AddTeacher.svelte';
+	import AddOrder from '$lib/components/CRUD/AddOrder.svelte';
 	import UpdateCourse from '$lib/components/CRUD/UpdateCourse.svelte';
 	import DeleteCourse from '$lib/components/CRUD/DeleteCourse.svelte';
 	import UpdateTeacher from '$lib/components/CRUD/UpdateTeacher.svelte';

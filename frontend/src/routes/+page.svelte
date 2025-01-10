@@ -1,6 +1,7 @@
 <script>
 	import LoadData from '$lib/components/LoadData.svelte';
+	import Startpage from '$lib/components/Startpage.svelte';
 </script>
 
 <LoadData />
-<h1>Startsida</h1>
+<Startpage />
