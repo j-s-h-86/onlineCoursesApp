@@ -40,31 +40,44 @@
 	}
 </script>
 
-<form on:submit|preventDefault={addNewOrder}>
-	<div>
-		<label for="fullName">Namn:</label>
-		<input type="text" id="fullName" bind:value={fullName} required />
-	</div>
+<div class="orderForm">
+	<h3>Skapa order</h3>
+	<br />
+	<form on:submit|preventDefault={addNewOrder}>
+		<div>
+			<label for="fullName">Namn:</label><br />
+			<input type="text" id="fullName" bind:value={fullName} required />
+		</div>
 
-	<div>
-		<label for="email">Epost:</label>
-		<input type="email" id="email" bind:value={email} required />
-	</div>
+		<div>
+			<label for="email">Epost:</label><br />
+			<input type="email" id="email" bind:value={email} required />
+		</div>
 
-	<div>
-		<label for="courseId">Välj en kurs:</label>
-		<select id="courseId" bind:value={selectedCourseId}>
-			<option value="" disabled>Välj en kurs...</option>
-			{#each $courses as course}
-				<option value={course.id}>{course.courseName}</option>
-			{/each}
-		</select>
-	</div>
+		<div>
+			<label for="courseId">Välj en kurs:</label><br />
+			<select id="courseId" bind:value={selectedCourseId}>
+				<option value="" disabled>Välj en kurs...</option>
+				{#each $courses as course}
+					<option value={course.id}>{course.courseName}</option>
+				{/each}
+			</select>
+		</div>
 
-	<div>
-		<label for="price">Pris:</label>
-		<input type="number" id="price" step="0.01" bind:value={price} required />
-	</div>
+		<div>
+			<label for="price">Pris:</label><br />
+			<input type="number" id="price" step="0.01" bind:value={price} required />
+		</div>
 
-	<button type="submit">Lägg order</button>
-</form>
+		<button type="submit">Lägg order</button>
+	</form>
+</div>
+
+<style>
+	.orderForm {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-evenly;
+	}
+</style>

@@ -33,32 +33,43 @@
 </script>
 
 <div class="courseForm">
+	<h3>Skapa kurs</h3>
+	<br />
 	<form on:submit|preventDefault={addNewCourse}>
 		<div>
-			<label for="courseName">Kursnamn:</label>
+			<label for="courseName">Kursnamn:</label><br />
 			<input type="text" id="courseName" bind:value={courseName} required />
 		</div>
 
 		<div>
-			<label for="courseDescription">Beskrivning:</label>
+			<label for="courseDescription">Beskrivning:</label><br />
 			<textarea id="courseDescription" bind:value={courseDescription} required></textarea>
 		</div>
 
 		<div>
-			<label for="teacherId">Lärare (ID):</label>
+			<label for="teacherId">Lärare (ID):</label><br />
 			<input type="number" id="teacherId" bind:value={teacherId} required />
 		</div>
 
 		<div>
-			<label for="occasions">Antal tillfällen:</label>
+			<label for="occasions">Antal tillfällen:</label><br />
 			<input type="number" id="occasions" bind:value={occasions} required />
 		</div>
 
 		<div>
-			<label for="price">Pris:</label>
+			<label for="price">Pris:</label><br />
 			<input type="number" id="price" step="0.01" bind:value={price} required />
 		</div>
 
 		<button type="submit">Lägg till kurs</button>
 	</form>
 </div>
+
+<style>
+	.courseForm {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-evenly;
+	}
+</style>

@@ -36,11 +36,10 @@ class Teacher
 
     public function updateTeacher($id, $data)
     {
-        $query = "UPDATE teachers SET teacherName = :teacherName, teacherDescription = :teacherDescription, teacherEmail = :teacherEmail, teacherImg = :teacherImg WHERE id = :id";
+        $query = "UPDATE teachers SET teacherDescription = :teacherDescription, teacherEmail = :teacherEmail, teacherImg = :teacherImg WHERE id = :id";
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute([
             ':id' => $id,
-            ':teacherName' => $data['teacherName'],
             ':teacherDescription' => $data['teacherDescription'],
             ':teacherEmail' => $data['teacherEmail'],
             ':teacherImg' => $data['teacherImg']

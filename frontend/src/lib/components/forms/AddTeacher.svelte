@@ -30,27 +30,39 @@
 	}
 </script>
 
-<form on:submit|preventDefault={addNewTeacher}>
-	<div>
-		<label for="teacherName">Lärarnamn:</label>
-		<input type="text" id="teacherName" bind:value={teacherName} required />
-	</div>
+<div class="teacherForm">
+	<h3>Lägg till lärare</h3>
+	<br />
+	<form on:submit|preventDefault={addNewTeacher}>
+		<div>
+			<label for="teacherName">Lärarnamn:</label><br />
+			<input type="text" id="teacherName" bind:value={teacherName} required />
+		</div>
 
-	<div>
-		<label for="teacherDescription">Beskrivning:</label>
-		<textarea id="teacherDescription" bind:value={teacherDescription} required></textarea>
-	</div>
+		<div>
+			<label for="teacherDescription">Beskrivning:</label><br />
+			<textarea id="teacherDescription" bind:value={teacherDescription} required></textarea>
+		</div>
 
-	<div>
-		<label for="teacherEmail">Lärares epost:</label>
-		<input type="text" id="teacherEmail" bind:value={teacherEmail} required />
-	</div>
+		<div>
+			<label for="teacherEmail">Lärares epost:</label><br />
+			<input type="text" id="teacherEmail" bind:value={teacherEmail} required />
+		</div>
 
-	<div>
-		<label for="teacherImg">Lärarbild:</label>
-		<input type="text" id="teacherImg" bind:value={teacherImg} required />
-	</div>
+		<div>
+			<label for="teacherImg">Lärarbild:</label><br />
+			<input type="text" id="teacherImg" bind:value={teacherImg} required />
+		</div>
 
-	<button type="submit">Lägg till lärare</button>
-</form>
-<DeleteTeacher />
+		<button type="submit">Lägg till lärare</button>
+	</form>
+</div>
+
+<style>
+	.teacherForm {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		justify-content: space-evenly;
+	}
+</style>

@@ -38,35 +38,45 @@
 	}
 </script>
 
-<div>
-	<label for="courseId">Välj en kurs att uppdatera:</label>
+<div class="updateCourseDiv">
+	<h3>Uppdatera kurs</h3>
+	<br />
+	<label for="courseId">Välj en kurs att uppdatera:</label><br />
 	<select id="courseId" bind:value={selectedCourseId}>
 		<option value="" disabled selected>Välj en kurs...</option>
 		{#each $courses as course}
 			<option value={course.id}>{course.courseName}</option>
 		{/each}
 	</select>
+	{#if selectedCourseId}
+		<div class="courseForm">
+			<form on:submit|preventDefault={handleUpdate}>
+				<div>
+					<label for="teacherId">Lärare (ID):</label><br />
+					<input type="number" id="teacherId" bind:value={teacherId} required />
+				</div>
+
+				<div>
+					<label for="occasions">Antal tillfällen:</label><br />
+					<input type="number" id="occasions" bind:value={occasions} required />
+				</div>
+
+				<div>
+					<label for="price">Pris:</label><br />
+					<input type="number" id="price" step="0.01" bind:value={price} required />
+				</div>
+
+				<button type="submit">Uppdatera kurs</button>
+			</form>
+		</div>
+	{/if}
 </div>
 
-{#if selectedCourseId}
-	<div class="courseForm">
-		<form on:submit|preventDefault={handleUpdate}>
-			<div>
-				<label for="teacherId">Lärare (ID):</label>
-				<input type="number" id="teacherId" bind:value={teacherId} required />
-			</div>
-
-			<div>
-				<label for="occasions">Antal tillfällen:</label>
-				<input type="number" id="occasions" bind:value={occasions} required />
-			</div>
-
-			<div>
-				<label for="price">Pris:</label>
-				<input type="number" id="price" step="0.01" bind:value={price} required />
-			</div>
-
-			<button type="submit">Uppdatera kurs</button>
-		</form>
-	</div>
-{/if}
+<style>
+	.courseForm {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-evenly;
+	}
+</style>

@@ -23,13 +23,15 @@
 </script>
 
 <div>
-	<label for="teacherId">Välj en lärare att ta bort:</label>
+	<h3>Ta bort lärare</h3>
+	<br />
+	<label for="teacherId">Välj en lärare att ta bort:</label><br />
 	<select id="teacherId" bind:value={selectedTeacherId}>
 		<option value="" disabled selected>Välj en lärare...</option>
 		{#each $teachers as teacher}
 			<option value={teacher.id}>{teacher.teacherName}</option>
 		{/each}
 	</select>
+	<br />
+	<button on:click={handleDelete}>Ta bort lärare</button>
 </div>
-
-<button on:click={handleDelete}>Ta bort lärare</button>

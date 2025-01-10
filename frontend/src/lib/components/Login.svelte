@@ -1,5 +1,5 @@
 <script>
-	import { user } from '../../stores';
+	import { user } from '$lib/stores';
 
 	const baseURL = import.meta.env.VITE_API_BASE_URL;
 

@@ -43,4 +43,24 @@ class Order
         return false;
     }
 
+    public function updateOrder($id, $data)
+    {
+        $query = "UPDATE orders SET fullName = :fullName, email = :email, courseId = :courseId, price = :price WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([
+            ':id' => $id,
+            'fullName' => $data['fullName'],
+            'email' => $data['email'],
+            'courseId' => $data['courseId'],
+            'price' => $data['price']
+        ]);
+    }
+
+    public function deleteOrder($id)
+    {
+        $query = "DELETE FROM orders WHERE id = :id";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([':id' => $id]);
+    }
+
 }

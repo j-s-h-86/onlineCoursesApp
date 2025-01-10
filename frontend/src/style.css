@@ -3,11 +3,33 @@ html, body {
     padding: 0;
     font-family: 'Arial', sans-serif;
     background-color: #3a424a;
-		color: #ffb764;
+		color: white;
     height: 100%;
     box-sizing: border-box;
 }
 
 *, *::before, *::after {
     box-sizing: inherit;
+}
+
+h3 {
+  padding: 5px;
+  border-bottom: 1px solid #ffb764;
+}
+
+select {
+  margin: 10px;
+  border: 3px solid #ffb764;
+  border-radius: 10px;
+  background-color: #3a424a;
+  color: #ffb764;
+  padding: 5px;
+}
+
+button {
+  margin: 5px;
+  border: 2px solid black;
+  border-radius: 10px;
+  background-color: #4c535a;
+  padding: 5px;
 }

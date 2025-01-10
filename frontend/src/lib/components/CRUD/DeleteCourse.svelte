@@ -23,12 +23,18 @@
 </script>
 
 <div>
-	<label for="courseId">Välj en kurs att radera:</label>
+	<h3>Ta bort kurs</h3>
+	<br />
+	<label for="courseId">Välj en kurs att radera:</label><br />
 	<select id="courseId" bind:value={selectedCourseId}>
 		<option value="" disabled selected>Välj en kurs...</option>
 		{#each $courses as course}
 			<option value={course.id}>{course.courseName}</option>
 		{/each}
 	</select>
+	<br />
 	<button on:click={handleDelete}>Radera kurs</button>
 </div>
+
+<style>
+</style>

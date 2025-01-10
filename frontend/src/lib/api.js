@@ -132,6 +132,8 @@ export async function getOrders() {
 		throw new Error(`Error fetching orders: ${response.statusText}`);
 	}
 	const data = await response.json();
+	console.log(data);
+
 	orders.set(data);
 }
 
@@ -139,10 +141,50 @@ export async function getOrderById(id) {
 	if (!id) {
 		throw new Error('Order ID is required');
 	}
-	const response = await fetch(`${baseURL}/orders?id=${id}`);
+	const response = await fetch(`${baseURL}/orders/${id}`);
 	if (!response.ok) {
 		throw new Error(`Error fetching order with ID ${id}: ${response.statusText}`);
 	}
 	const data = await response.json();
 	return data;
+}
+
+export async function updateOrder(id, updatedData) {
+	const response = await fetch(`${baseURL}/orders/${id}`, {
+		method: 'PUT',
+		headers: {
+			'Content-Type': 'application/json'
+		},
+		body: JSON.stringify(updatedData)
+	});
+
+	if (!response.ok) {
+		throw new Error(`Failed to update order: ${response.statusText}`);
+	}
+
+	return await response.json();
+}
+
+export async function deleteOrder(id) {
+	const response = await fetch(`${baseURL}/orders/${id}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	if (!response.ok) {
+		console.error(`Error deleting order: ${response.statusText}`);
+		throw new Error(`Error deleting order: ${response.statusText}`);
+	}
+
+	const result = await response.json();
+	console.log('Delete order result:', result);
+
+	if (result.message === 'Order removed successfully') {
+		alert('Ordern har raderats!');
+	} else {
+		console.error('Error: Order not deleted', result);
+		alert('Det gick inte att radera ordern');
+	}
 }
