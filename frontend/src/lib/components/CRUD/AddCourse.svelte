@@ -1,6 +1,4 @@
 <script>
-	import DeleteCourse from '../CRUD/DeleteCourse.svelte';
-
 	export let url;
 
 	let courseName = '';

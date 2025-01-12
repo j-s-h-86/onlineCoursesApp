@@ -14,6 +14,7 @@ require_once '../../config/database.php';
 require_once '../../models/Course.php';
 require_once '../../models/Teacher.php';
 require_once '../../models/Order.php';
+require_once '../../models/Message.php';
 
 $dbContext = new DBContext();
 $pdo = $dbContext->getPdo();
@@ -264,6 +265,67 @@ switch ($resource) {
                 } else {
                     http_response_code(404);
                     echo json_encode(["message" => "Order not found"]);
+                }
+                break;
+
+            default:
+                http_response_code(405);
+                echo json_encode(["message" => "Method not allowed"]);
+                break;
+        }
+        break;
+
+    case 'messages':
+        $messageModel = new Message($pdo);
+        header("Content-Type: application/json");
+
+        switch ($_SERVER['REQUEST_METHOD']) {
+            case 'GET':
+                if ($id) {
+                    $data = $messageModel->getMessageById($id);
+                    if ($data) {
+                        echo json_encode($data);
+                    } else {
+                        http_response_code(404);
+                        echo json_encode(["message" => "Message not found"]);
+                    }
+                } else {
+                    $message = $messageModel->getAllMessages();
+                    echo json_encode($message);
+                }
+                break;
+
+            case 'POST':
+                $input = json_decode(file_get_contents('php://input'), true);
+                if (json_last_error() === JSON_ERROR_NONE) {
+                    $result = $messageModel->createMessage($input);
+                    if ($result) {
+                        http_response_code(201);
+                        echo json_encode(["message" => "Message added successfully"]);
+                    } else {
+                        http_response_code(500);
+                        echo json_encode(["message" => "Failed to add message"]);
+                    }
+                } else {
+                    http_response_code(400);
+                    echo json_encode(["message" => "Invalid JSON input"]);
+                }
+                break;
+
+
+            case 'DELETE':
+                if (!$id) {
+                    http_response_code(400);
+                    echo json_encode(["message" => "Missing message ID"]);
+                    break;
+                }
+
+                $result = $messageModel->deleteMessage($id);
+                if ($result) {
+                    echo json_encode(["message" => "Message removed successfully"]);
+                } else {
+                    http_response_code(404);
+                    echo json_encode(["message" => "Message not found"]);
                 }
                 break;
 

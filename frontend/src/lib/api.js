@@ -188,3 +188,49 @@ export async function deleteOrder(id) {
 		alert('Det gick inte att radera ordern');
 	}
 }
+
+export async function getMessages() {
+	const response = await fetch(`${baseURL}/messages`);
+	if (!response.ok) {
+		throw new Error(`Error fetching messages: ${response.statusText}`);
+	}
+	const data = await response.json();
+	console.log(data);
+	messages.set(data);
+}
+
+export async function getMessageById(id) {
+	if (!id) {
+		throw new Error('Message ID is required');
+	}
+	const response = await fetch(`${baseURL}/messages/${id}`);
+	if (!response.ok) {
+		throw new Error(`Error fetching message with ID ${id}: ${response.statusText}`);
+	}
+	const data = await response.json();
+	return data;
+}
+
+export async function deleteMessage(id) {
+	const response = await fetch(`${baseURL}/messages/${id}`, {
+		method: 'DELETE',
+		headers: {
+			'Content-Type': 'application/json'
+		}
+	});
+
+	if (!response.ok) {
+		console.error(`Error deleting message: ${response.statusText}`);
+		throw new Error(`Error deleting message: ${response.statusText}`);
+	}
+
+	const result = await response.json();
+	console.log('Delete message result:', result);
+
+	if (result.message === 'Message removed successfully') {
+		alert('Meddelandet har raderats!');
+	} else {
+		console.error('Error: Message not deleted', result);
+		alert('Det gick inte att radera meddelandet');
+	}
+}
