@@ -34,11 +34,13 @@
 </script>
 
 <form on:submit={handleSubmit}>
-	<label for="email">Email</label>
+	<label for="email">Email</label><br />
 	<input type="email" id="email" bind:value={email} required />
-
-	<label for="password">Password</label>
+	<br />
+	<br />
+	<label for="password">Password</label><br />
 	<input type="password" id="password" bind:value={password} required />
-
+	<br />
+	<br />
 	<button type="submit">Login</button>
 </form>

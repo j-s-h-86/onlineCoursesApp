@@ -20,9 +20,7 @@
 
 	function openPurchaseModal(course) {
 		selectedCourse = course;
-		console.log('Opening modal for course:', course);
 		modalStates.update((state) => {
-			console.log('Updating modal state to true');
 			return { ...state, purchaseModal: true };
 		});
 	}

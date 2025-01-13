@@ -1,7 +1,7 @@
 <div class="startPage">
 	<div class="heroImg">
 		<img src="/webbkurs.jpg" alt="webbkursbild" />
-		<a href="/courses" class="notButton">Ta reda på hur!</a>
+		<a href="/courses" class="notButton">Titta på våra kurser!</a>
 	</div>
 </div>
 
@@ -28,9 +28,9 @@
 	.notButton {
 		height: 60px;
 		width: 150px;
-		position: absolute;
-		top: 40%;
-		right: 5%;
+		position: fixed;
+		top: 50%;
+		right: 15%;
 		transform: translate(-50%, -50%);
 		background-color: rgba(44, 43, 43, 0.7);
 		color: white;
@@ -39,5 +39,27 @@
 		font-size: 1.2rem;
 		border-radius: 5px;
 		text-align: center;
+	}
+
+	@media (max-width: 768px) {
+		.startPage {
+			height: 100vh;
+		}
+		.heroImg {
+			width: 100%;
+			height: auto;
+			position: relative;
+			display: inline-block;
+		}
+
+		.notButton {
+			height: 50px;
+			width: 100px;
+			position: fixed;
+			top: 40%;
+			right: 1%;
+			transform: translate(-50%, -50%);
+			font-size: 0.7rem;
+		}
 	}
 </style>

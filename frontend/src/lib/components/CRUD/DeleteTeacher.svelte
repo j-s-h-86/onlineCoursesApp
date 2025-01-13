@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from 'svelte';
-	import { get } from 'svelte/store';
 	import { teachers } from '$lib/stores';
 	import { getTeachers, deleteTeacher } from '$lib/api';
 

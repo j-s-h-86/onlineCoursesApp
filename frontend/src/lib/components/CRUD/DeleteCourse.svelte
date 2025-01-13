@@ -1,6 +1,5 @@
 <script>
 	import { onMount } from 'svelte';
-	import { get } from 'svelte/store';
 	import { courses } from '$lib/stores';
 	import { deleteCourse, getCourses } from '$lib/api';
 
@@ -35,6 +34,3 @@
 	<br />
 	<button on:click={handleDelete}>Radera kurs</button>
 </div>
-
-<style>
-</style>

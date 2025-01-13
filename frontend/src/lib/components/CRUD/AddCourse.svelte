@@ -23,10 +23,19 @@
 				body: JSON.stringify(courseData)
 			});
 			const result = await response.json();
-			alert(result.message || 'Course added successfully!');
+			alert(result.message || 'Kurs tillagd!');
+			resetForm();
 		} catch (error) {
 			console.error('Error submitting course:', error);
 		}
+	}
+
+	function resetForm() {
+		courseName = '';
+		courseDescription = '';
+		teacherId = '';
+		occasions = '';
+		price = '';
 	}
 </script>
 

@@ -1,6 +1,4 @@
 <script>
-	import DeleteTeacher from '../CRUD/DeleteTeacher.svelte';
-
 	export let url;
 
 	let teacherName = '';
@@ -23,10 +21,18 @@
 				body: JSON.stringify(teacherData)
 			});
 			const result = await response.json();
-			alert(result.message || 'Teacher added successfully!');
+			alert(result.message || 'Lärare tillagd!');
+			resetForm();
 		} catch (error) {
 			console.error('Error submitting teacher:', error);
 		}
+	}
+
+	function resetForm() {
+		teacherName = '';
+		teacherDescription = '';
+		teacherEmail = '';
+		teacherImg = '';
 	}
 </script>
 

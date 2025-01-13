@@ -3,6 +3,7 @@
 	import { get } from 'svelte/store';
 	import { courses } from '$lib/stores';
 	import { getCourses } from '$lib/api';
+
 	export let url;
 
 	let fullName = '';
@@ -33,10 +34,18 @@
 				body: JSON.stringify(orderData)
 			});
 			const result = await response.json();
-			alert(result.message || 'Order added successfully!');
+			alert(result.message || 'Order tillagd!');
+			resetForm();
 		} catch (error) {
 			console.error('Error submitting order:', error);
 		}
+	}
+
+	function resetForm() {
+		fullName = '';
+		email = '';
+		selectedCourseId = '';
+		price = '';
 	}
 </script>
 

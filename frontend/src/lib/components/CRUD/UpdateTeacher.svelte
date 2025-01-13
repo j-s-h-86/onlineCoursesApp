@@ -19,7 +19,7 @@
 			const confirmed = confirm('Är du säker på att du vill uppdatera denna lärare?');
 			if (confirmed) {
 				try {
-					await updateCourse(selectedTeacherId, {
+					await updateTeacher(selectedTeacherId, {
 						teacherName,
 						teacherDescription,
 						teacherEmail,
