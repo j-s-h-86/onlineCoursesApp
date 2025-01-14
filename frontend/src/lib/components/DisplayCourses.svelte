@@ -63,6 +63,7 @@
 		border-radius: 10%;
 		margin: 20px;
 		background-color: #595e61;
+		padding: 10px;
 	}
 
 	.purchaseButton {

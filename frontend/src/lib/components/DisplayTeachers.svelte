@@ -23,6 +23,10 @@
 {/if}
 
 <style>
+	h2 {
+		color: #ffb764;
+	}
+
 	.onlineTeachers {
 		width: 100%;
 		display: flex;

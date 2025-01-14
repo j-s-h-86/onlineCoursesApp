@@ -111,7 +111,7 @@ class DBContext
 
         if ($count == 0) {
             $sql = "INSERT INTO teachers (teacherName, teacherDescription, teacherEmail, teacherImg) VALUES
-                    ('Johan Hammarstedt', 'Jag är ingen alfahanne, Honey. Så du kan sitta längst fram i taxin.', 'johan@onlinecourses.com', 'http://localhost:8000/backend/assets/johan.jpg'),
+                    ('Johan Hammarstedt', 'Jag är ingen alfahanne, honey. Så du kan sitta längst fram i taxin.', 'johan@onlinecourses.com', 'http://localhost:8000/backend/assets/johan.jpg'),
                     ('Anders Glenmark', 'Var oslagbar och hade svaren på allt.', 'glennis@onlinecourses.com', 'http://localhost:8000/backend/assets/glennis.jpg'),
                     ('Orup', 'Blir hellre jagad av vargar.', 'orup@onlinecourses.com', 'http://localhost:8000/backend/assets/orup.jpg')";
             $this->pdo->exec($sql);
