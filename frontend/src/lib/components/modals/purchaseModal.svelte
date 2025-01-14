@@ -123,9 +123,14 @@
 		top: 20%;
 		position: fixed;
 		z-index: 1000;
+		background-color: #595e61;
 	}
 
 	dialog::backdrop {
 		background: rgba(0, 0, 0, 0.8);
+	}
+
+	button {
+		color: #ffb764;
 	}
 </style>
