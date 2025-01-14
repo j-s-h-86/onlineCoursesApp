@@ -11,9 +11,9 @@
 	onMount(async () => {
 		try {
 			await getTeachers();
-			const teachersData = get(teachers);
+			await getCourses();
 
-			const mappedTeachers = teachersData.map((teacher) => {
+			const mappedTeachers = $teachers.map((teacher) => {
 				return {
 					id: teacher.id,
 					name: teacher.teacherName,
@@ -28,10 +28,7 @@
 				return map;
 			}, {});
 
-			await getCourses();
-			const coursesData = get(courses);
-
-			const mappedCourses = coursesData.map((course) => {
+			const mappedCourses = $courses.map((course) => {
 				return {
 					id: course.id,
 					name: course.courseName,

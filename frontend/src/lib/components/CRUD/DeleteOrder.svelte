@@ -14,10 +14,16 @@
 			const confirmed = confirm('Är du säker på att du vill radera denna order?');
 			if (confirmed) {
 				await deleteOrder(selectedOrderId);
+				resetForm();
+				getOrders();
 			}
 		} else {
 			alert('Vänligen välj en order att radera');
 		}
+	}
+
+	function resetForm() {
+		selectedOrderId = '';
 	}
 </script>
 

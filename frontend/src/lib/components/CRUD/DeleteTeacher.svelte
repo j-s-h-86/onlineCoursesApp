@@ -14,10 +14,16 @@
 			const confirmed = confirm('Är du säker på att du vill ta bort denna lärare?');
 			if (confirmed) {
 				await deleteTeacher(selectedTeacherId);
+				resetForm();
+				getTeachers();
 			}
 		} else {
 			alert('Vänligen välj en lärare att radera');
 		}
+	}
+
+	function resetForm() {
+		selectedTeacherId = '';
 	}
 </script>
 

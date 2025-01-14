@@ -1,25 +1,16 @@
 <script>
-	import { teachers } from '$lib/stores';
 	import { onMount } from 'svelte';
-	import { get } from 'svelte/store';
+	import { teachers } from '$lib/stores';
 
-	let allTeachers = [];
-
-	onMount(() => {
-		const unsubscribe = teachers.subscribe((value) => {
-			allTeachers = value;
-		});
-
-		return () => {
-			unsubscribe();
-		};
+	onMount(async () => {
+		await getTeachers();
 	});
 </script>
 
 <h2>Våra lärare</h2>
-{#if allTeachers.length > 0}
+{#if $teachers.length > 0}
 	<div class="onlineTeachers">
-		{#each allTeachers as teacher}
+		{#each $teachers as teacher}
 			<div class="teacher">
 				<h3>{teacher.name}</h3>
 				<div class="teacherImgContainer">

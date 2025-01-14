@@ -14,6 +14,10 @@
 		await getOrders();
 	});
 
+	async function getNewestData() {
+		await getOrders();
+	}
+
 	async function handleUpdate() {
 		if (selectedOrderId) {
 			const confirmed = confirm('Är du säker på att du vill uppdatera denna order?');
@@ -27,6 +31,7 @@
 					});
 					alert('Order har uppdaterats!');
 					resetForm();
+					getOrders();
 				} catch (error) {
 					console.error(error);
 					alert('Det gick inte att uppdatera ordern.');
@@ -50,7 +55,7 @@
 	<h3>Uppdatera en order</h3>
 	<br />
 	<label for="orderId">Välj en order att uppdatera:</label><br />
-	<select id="orderId" bind:value={selectedOrderId}>
+	<select id="orderId" bind:value={selectedOrderId} on:click={getNewestData}>
 		<option value="" disabled selected>Välj en order...</option>
 		{#each $orders as order}
 			<option value={order.id}>{order.id}</option>

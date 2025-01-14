@@ -12,6 +12,10 @@
 		await getCourses();
 	});
 
+	async function getNewestData() {
+		await getCourses();
+	}
+
 	async function handleUpdate() {
 		if (selectedCourseId) {
 			const confirmed = confirm('Är du säker på att du vill uppdatera denna kurs?');
@@ -20,6 +24,7 @@
 					await updateCourse(selectedCourseId, { teacherId, occasions, price });
 					alert('Kursen har uppdaterats!');
 					resetForm();
+					getCourses();
 				} catch (error) {
 					console.error(error);
 					alert('Det gick inte att uppdatera kursen.');
@@ -42,7 +47,7 @@
 	<h3>Uppdatera kurs</h3>
 	<br />
 	<label for="courseId">Välj en kurs att uppdatera:</label><br />
-	<select id="courseId" bind:value={selectedCourseId}>
+	<select id="courseId" bind:value={selectedCourseId} on:click={getNewestData}>
 		<option value="" disabled selected>Välj en kurs...</option>
 		{#each $courses as course}
 			<option value={course.id}>{course.courseName}</option>

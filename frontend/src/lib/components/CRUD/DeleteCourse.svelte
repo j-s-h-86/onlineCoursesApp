@@ -14,10 +14,16 @@
 			const confirmed = confirm('Är du säker på att du vill radera denna kurs?');
 			if (confirmed) {
 				await deleteCourse(selectedCourseId);
+				resetForm();
+				getCourses();
 			}
 		} else {
 			alert('Vänligen välj en kurs att radera');
 		}
+	}
+
+	function resetForm() {
+		selectedCourseId = '';
 	}
 </script>
 

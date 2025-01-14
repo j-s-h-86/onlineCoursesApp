@@ -1,21 +1,13 @@
 <script>
+	import { onMount } from 'svelte';
 	import PurchaseModal from './modals/purchaseModal.svelte';
 	import { modalStates, courses } from '$lib/stores';
-	import { onMount } from 'svelte';
-	import { get } from 'svelte/store';
 
-	let allCourses = [];
 	let purchaseModal = false;
 	let selectedCourse = null;
 
-	onMount(() => {
-		const unsubscribe = courses.subscribe((value) => {
-			allCourses = value;
-		});
-
-		return () => {
-			unsubscribe();
-		};
+	onMount(async () => {
+		await getCourses();
 	});
 
 	function openPurchaseModal(course) {
@@ -33,9 +25,9 @@
 </script>
 
 <h2>Kursutbud</h2>
-{#if allCourses.length > 0}
+{#if $courses.length > 0}
 	<div class="onlineCourses">
-		{#each allCourses as course}
+		{#each $courses as course}
 			<div class="course">
 				<h3>{course.name}</h3>
 				<span><b>Kursbeskrivning:</b></span>

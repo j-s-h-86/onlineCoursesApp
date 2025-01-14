@@ -19,10 +19,17 @@
 				body: JSON.stringify(messageData)
 			});
 			const result = await response.json();
+			resetForm();
 			alert(result.message || 'Message added successfully!');
 		} catch (error) {
 			console.error('Error submitting message:', error);
 		}
+	}
+
+	function resetForm() {
+		fullName = '';
+		email = '';
+		message = '';
 	}
 </script>
 
