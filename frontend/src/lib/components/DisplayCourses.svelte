@@ -1,14 +1,10 @@
 <script>
-	import { onMount } from 'svelte';
 	import PurchaseModal from './modals/purchaseModal.svelte';
 	import { modalStates, courses } from '$lib/stores';
 
 	let purchaseModal = false;
 	let selectedCourse = null;
-
-	onMount(async () => {
-		await getCourses();
-	});
+	let error = null;
 
 	function openPurchaseModal(course) {
 		selectedCourse = course;

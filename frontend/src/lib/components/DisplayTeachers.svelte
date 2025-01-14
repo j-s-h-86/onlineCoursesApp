@@ -1,10 +1,5 @@
 <script>
-	import { onMount } from 'svelte';
 	import { teachers } from '$lib/stores';
-
-	onMount(async () => {
-		await getTeachers();
-	});
 </script>
 
 <h2>Våra lärare</h2>
