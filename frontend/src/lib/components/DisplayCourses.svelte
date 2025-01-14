@@ -44,6 +44,10 @@
 {/if}
 
 <style>
+	h2 {
+		color: #ffb764;
+	}
+
 	.onlineCourses {
 		width: 100%;
 		display: flex;

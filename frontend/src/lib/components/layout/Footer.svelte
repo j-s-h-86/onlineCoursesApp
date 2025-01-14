@@ -11,7 +11,8 @@
 
 <style>
 	footer {
-		height: 30px;
+		height: 40px;
+		width: 100%;
 		border-top: 1px solid #ffb764;
 		color: #ffb764;
 		margin-bottom: 0;

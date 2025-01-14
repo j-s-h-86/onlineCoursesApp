@@ -26,10 +26,8 @@
 	$: if (dialog) {
 		console.log('Dialog element found');
 		if ($modalStates.purchaseModal) {
-			console.log('Showing modal');
 			dialog.showModal();
 		} else {
-			console.log('Hiding modal');
 			dialog.close();
 		}
 	}
@@ -62,9 +60,6 @@
 			if (!sessionResponse.ok) {
 				throw new Error('Failed to create Stripe Checkout session');
 			}
-
-			console.log('Stripe Checkout session created successfully:', session);
-
 			const result = await stripe.redirectToCheckout({
 				sessionId: session.id
 			});
@@ -80,10 +75,7 @@
 	async function handleSubmit(event) {
 		event.preventDefault();
 		const newOrder = { fullName, email, courseId, price };
-		console.log('Form data:', newOrder);
-
 		await handlePurchase(fullName, email, courseId, price);
-
 		closeModal();
 	}
 </script>

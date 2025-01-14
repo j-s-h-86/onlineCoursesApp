@@ -44,3 +44,9 @@
 	<br />
 	<button type="submit">Login</button>
 </form>
+
+<style>
+	button {
+		color: #ffb764;
+	}
+</style>

@@ -3,12 +3,14 @@
 
 	let fullName = '';
 	let email = '';
+	let subject = '';
 	let message = '';
 
 	async function addNewMessage() {
 		const messageData = {
 			fullName,
 			email,
+			subject,
 			message
 		};
 
@@ -29,6 +31,7 @@
 	function resetForm() {
 		fullName = '';
 		email = '';
+		subject = '';
 		message = '';
 	}
 </script>
@@ -48,6 +51,11 @@
 		</div>
 
 		<div>
+			<label for="subject">Ämne:</label><br />
+			<input type="subject" id="subject" bind:value={subject} required />
+		</div>
+
+		<div>
 			<label for="message">Ditt meddelande:</label><br />
 			<textarea id="message" bind:value={message} required></textarea>
 		</div>
@@ -62,5 +70,9 @@
 		flex-direction: column;
 		align-items: flex-start;
 		justify-content: space-evenly;
+	}
+
+	button {
+		color: #ffb764;
 	}
 </style>
