@@ -1,11 +1,17 @@
 <script>
+	import { onMount } from 'svelte';
+	import { modalStates } from '$lib/stores';
+
 	const baseURL = import.meta.env.VITE_API_BASE_URL;
 
+	export let selectedTeacher;
+
+	let dialog;
 	let fullName = '';
 	let email = '';
-	const recipient = 'info@jao.se';
 	let subject = '';
 	let message = '';
+	let recipient = selectedTeacher?.name || '';
 
 	async function addNewMessage() {
 		const messageData = {
@@ -25,6 +31,7 @@
 			const result = await response.json();
 			alert(result.message || 'Message added successfully!');
 			resetForm();
+			closeModal();
 		} catch (error) {
 			console.error('Error submitting message:', error);
 		}
@@ -33,14 +40,32 @@
 	function resetForm() {
 		fullName = '';
 		email = '';
+		recipient = '';
 		subject = '';
 		message = '';
 	}
+
+	$: if (dialog) {
+		console.log('Dialog element found');
+		if ($modalStates.messageModal) {
+			dialog.showModal();
+		} else {
+			dialog.close();
+		}
+	}
+
+	function closeModal() {
+		modalStates.update((state) => ({
+			...state,
+			messageModal: false
+		}));
+		dialog.close();
+	}
 </script>
 
-<div class="messageForm">
-	<h3>Skicka ett meddelande till oss</h3>
-	<br />
+<dialog bind:this={dialog} on:close={closeModal}>
+	<slot name="header" />
+	<h3>Meddelande till {selectedTeacher?.name}</h3>
 	<form on:submit|preventDefault={addNewMessage}>
 		<div>
 			<label for="fullName">Namn:</label><br />
@@ -61,17 +86,27 @@
 			<label for="message">Ditt meddelande:</label><br />
 			<textarea id="message" bind:value={message} required></textarea>
 		</div>
-
+		<input type="hidden" bind:value={recipient} />
 		<button type="submit">Skicka meddelande</button>
+		<button on:click={closeModal} aria-label="Close the modal">Stäng</button>
 	</form>
-</div>
+</dialog>
 
 <style>
-	.messageForm {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-start;
-		justify-content: space-evenly;
+	dialog {
+		border-radius: 10px;
+		padding: 10;
+		width: 400px;
+		height: 500px;
+		margin-bottom: 20px;
+		top: 20%;
+		position: fixed;
+		z-index: 1000;
+		background-color: #595e61;
+	}
+
+	dialog::backdrop {
+		background: rgba(0, 0, 0, 0.8);
 	}
 
 	button {

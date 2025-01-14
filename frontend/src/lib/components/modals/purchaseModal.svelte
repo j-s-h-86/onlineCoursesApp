@@ -100,8 +100,8 @@
 		</div>
 		<input type="hidden" bind:value={courseId} />
 		<hr />
-		<button type="submit">Skicka</button>
-		<button on:click={closeModal} aria-label="Close the modal">Close</button>
+		<button type="submit">Köp</button>
+		<button on:click={closeModal} aria-label="Close the modal">Stäng</button>
 	</form>
 </dialog>
 

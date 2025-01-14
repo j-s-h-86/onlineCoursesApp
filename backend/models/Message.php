@@ -24,13 +24,14 @@ class Message
 
     public function createMessage($data)
     {
-        $query = "INSERT INTO messages (fullName, email, subject, message) VALUES (:fullName, :email, :subject, :message)";
+        $query = "INSERT INTO messages (fullName, email, recipient, subject, message) VALUES (:fullName, :email, :recipient, :subject, :message)";
         $stmt = $this->pdo->prepare($query);
         return $stmt->execute([
             ':fullName' => $data['fullName'],
             ':email' => $data['email'],
+            ':recipient' => $data['recipient'],
             ':subject' => $data['subject'],
-            'message' => $data['message']
+            ':message' => $data['message']
         ]);
     }
 

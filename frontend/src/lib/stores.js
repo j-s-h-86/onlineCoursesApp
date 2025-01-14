@@ -6,7 +6,8 @@ export const orders = writable([]);
 export const messages = writable([]);
 
 export const modalStates = writable({
-	purchaseModal: false
+	purchaseModal: false,
+	messageModal: false
 });
 
 modalStates.subscribe((value) => {

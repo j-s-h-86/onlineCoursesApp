@@ -4,7 +4,6 @@
 
 	let purchaseModal = false;
 	let selectedCourse = null;
-	let error = null;
 
 	function openPurchaseModal(course) {
 		selectedCourse = course;

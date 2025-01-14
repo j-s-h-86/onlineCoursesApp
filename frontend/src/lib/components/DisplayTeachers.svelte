@@ -1,5 +1,22 @@
 <script>
-	import { teachers } from '$lib/stores';
+	import MessageModal from './modals/MessageModal.svelte';
+	import { teachers, modalStates } from '$lib/stores';
+
+	let messageModal = false;
+	let selectedTeacher = null;
+
+	function openMessageModal(teacher) {
+		selectedTeacher = teacher;
+		modalStates.update((state) => {
+			return { ...state, messageModal: true };
+		});
+	}
+
+	modalStates.subscribe((state) => {
+		if (!state.messageModal) {
+			selectedTeacher = null;
+		}
+	});
 </script>
 
 <h2>Våra lärare</h2>
@@ -14,12 +31,19 @@
 				<div>
 					<p><b>Information:</b></p>
 					<p>{teacher.description}</p>
+					<button class="messageButton" on:click={() => openMessageModal(teacher)}
+						>Kontakta lärare</button
+					>
 				</div>
 			</div>
 		{/each}
 	</div>
 {:else}
 	<p>Inga lärare anställda just nu.</p>
+{/if}
+
+{#if selectedTeacher}
+	<MessageModal {selectedTeacher} />
 {/if}
 
 <style>
@@ -39,7 +63,7 @@
 		flex-direction: column;
 		justify-content: space-evenly;
 		text-align: center;
-		height: 400px;
+		height: 450px;
 		width: 350px;
 		border: 1px solid black;
 		border-radius: 10%;
@@ -55,5 +79,12 @@
 	img {
 		height: 100%;
 		width: auto;
+	}
+
+	.messageButton {
+		width: 100px;
+		height: 50px;
+		background-color: #3a424a;
+		color: #ffb764;
 	}
 </style>

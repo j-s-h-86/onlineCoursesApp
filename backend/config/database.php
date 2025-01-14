@@ -90,6 +90,7 @@ class DBContext
             `id` INT AUTO_INCREMENT NOT NULL,
             `fullName` VARCHAR(255) NOT NULL,
             `email` VARCHAR(255) NOT NULL,
+            `recipient` VARCHAR(255) NOT NULL,
             `subject` VARCHAR(255) NOT NULL,
             `message` TEXT(16383) NOT NULL,
             PRIMARY KEY (`id`)
