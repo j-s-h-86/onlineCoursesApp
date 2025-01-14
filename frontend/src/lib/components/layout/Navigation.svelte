@@ -7,6 +7,10 @@
 		{ name: 'Kontakt', url: '/contact' },
 		{ name: 'Admin', url: '/login' }
 	];
+
+	function closeMenu() {
+		isMenuOpen = false;
+	}
 </script>
 
 <nav>
@@ -23,7 +27,7 @@
 
 	<ul class:open={isMenuOpen}>
 		{#each links as link}
-			<li><a href={link.url}>{link.name}</a></li>
+			<li><a href={link.url} on:click={closeMenu}>{link.name}</a></li>
 		{/each}
 	</ul>
 </nav>
