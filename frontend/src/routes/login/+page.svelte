@@ -1,6 +1,5 @@
 <script>
 	import Login from '$lib/components/Login.svelte';
-	import { user } from '$lib/stores';
 </script>
 
 <div>
@@ -11,5 +10,9 @@
 <style>
 	div {
 		height: 100vh;
+	}
+
+	h2 {
+		color: #ffb764;
 	}
 </style>

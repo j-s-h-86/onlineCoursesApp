@@ -38,8 +38,8 @@
 	}
 </script>
 
+<h3>Skicka ett meddelande till oss</h3>
 <div class="messageForm">
-	<h3>Skicka ett meddelande till oss</h3>
 	<br />
 	<form on:submit|preventDefault={addNewMessage}>
 		<div>
@@ -67,6 +67,10 @@
 </div>
 
 <style>
+	h3 {
+		color: #ffb764;
+	}
+
 	.messageForm {
 		display: flex;
 		flex-direction: column;

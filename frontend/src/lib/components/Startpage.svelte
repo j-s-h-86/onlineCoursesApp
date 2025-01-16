@@ -28,9 +28,9 @@
 	.notButton {
 		height: 60px;
 		width: 150px;
-		position: fixed;
-		top: 50%;
-		right: 15%;
+		position: absolute;
+		top: 40%;
+		right: 10%;
 		transform: translate(-50%, -50%);
 		background-color: rgba(44, 43, 43, 0.7);
 		color: white;
