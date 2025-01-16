@@ -2,7 +2,10 @@
 	import { onMount } from 'svelte';
 	import { orders, courses } from '$lib/stores';
 	import { getOrders, updateOrder } from '$lib/api';
+	import ActionModal from '$lib/components/modals/ActionModal.svelte';
 
+	let showActionModal = false;
+	let actionModalOptions = {};
 	let selectedOrderId = '';
 	let orderId = '';
 	let fullName = '';
@@ -20,25 +23,35 @@
 
 	async function handleUpdate() {
 		if (selectedOrderId) {
-			const confirmed = confirm('Är du säker på att du vill uppdatera denna order?');
-			if (confirmed) {
-				try {
+			actionModalOptions = {
+				title: 'Bekräfta uppdatering',
+				message: 'Är du säker på att du vill uppdatera denna order?',
+				onConfirm: async () => {
+					showActionModal = false;
 					await updateOrder(selectedOrderId, {
 						fullName,
 						email,
 						courseId,
 						price
 					});
-					alert('Order har uppdaterats!');
 					resetForm();
 					getOrders();
-				} catch (error) {
-					console.error(error);
-					alert('Det gick inte att uppdatera ordern.');
+				},
+				onCancel: () => {
+					showActionModal = false;
 				}
-			}
+			};
+			showActionModal = true;
 		} else {
-			alert('Vänligen välj en order att uppdatera');
+			actionModalOptions = {
+				title: 'Fel',
+				message: 'Vänligen välj en order att uppdatera',
+				onConfirm: () => {
+					showActionModal = false;
+				},
+				onCancel: null
+			};
+			showActionModal = true;
 		}
 	}
 
@@ -93,6 +106,15 @@
 		</div>
 	{/if}
 </div>
+
+{#if showActionModal}
+	<ActionModal
+		title={actionModalOptions.title}
+		message={actionModalOptions.message}
+		onConfirm={actionModalOptions.onConfirm}
+		onCancel={actionModalOptions.onCancel}
+	/>
+{/if}
 
 <style>
 	.orderForm {

@@ -2,7 +2,10 @@
 	import { onMount } from 'svelte';
 	import { teachers } from '$lib/stores';
 	import { getTeachers, updateTeacher } from '$lib/api';
+	import ActionModal from '$lib/components/modals/ActionModal.svelte';
 
+	let showActionModal = false;
+	let actionModalOptions = {};
 	let selectedTeacherId = '';
 	let teacherId = '';
 	let teacherName = '';
@@ -20,25 +23,35 @@
 
 	async function handleUpdate() {
 		if (selectedTeacherId) {
-			const confirmed = confirm('Är du säker på att du vill uppdatera denna lärare?');
-			if (confirmed) {
-				try {
+			actionModalOptions = {
+				title: 'Bekräfta uppdatering',
+				message: 'Är du säker på att du vill uppdatera denna lärare?',
+				onConfirm: async () => {
+					showActionModal = false;
 					await updateTeacher(selectedTeacherId, {
 						teacherName,
 						teacherDescription,
 						teacherEmail,
 						teacherImg
 					});
-					alert('Läraren har uppdaterats!');
 					resetForm();
 					getTeachers();
-				} catch (error) {
-					console.error(error);
-					alert('Det gick inte att uppdatera läraren.');
+				},
+				onCancel: () => {
+					showActionModal = false;
 				}
-			}
+			};
+			showActionModal = true;
 		} else {
-			alert('Vänligen välj en lärare att uppdatera');
+			actionModalOptions = {
+				title: 'Fel',
+				message: 'Vänligen välj en lärare att uppdatera',
+				onConfirm: () => {
+					showActionModal = false;
+				},
+				onCancel: null
+			};
+			showActionModal = true;
 		}
 	}
 
@@ -88,6 +101,15 @@
 		</div>
 	{/if}
 </div>
+
+{#if showActionModal}
+	<ActionModal
+		title={actionModalOptions.title}
+		message={actionModalOptions.message}
+		onConfirm={actionModalOptions.onConfirm}
+		onCancel={actionModalOptions.onCancel}
+	/>
+{/if}
 
 <style>
 	.teacherForm {

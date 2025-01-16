@@ -2,7 +2,10 @@
 	import { onMount } from 'svelte';
 	import { teachers } from '$lib/stores';
 	import { getTeachers, deleteTeacher } from '$lib/api';
+	import ActionModal from '$lib/components/modals/ActionModal.svelte';
 
+	let showActionModal = false;
+	let actionModalOptions = {};
 	let selectedTeacherId = '';
 
 	onMount(async () => {
@@ -11,14 +14,30 @@
 
 	async function handleDelete() {
 		if (selectedTeacherId) {
-			const confirmed = confirm('Är du säker på att du vill ta bort denna lärare?');
-			if (confirmed) {
-				await deleteTeacher(selectedTeacherId);
-				resetForm();
-				getTeachers();
-			}
+			actionModalOptions = {
+				title: 'Bekräfta borttagning',
+				message: 'Är du säker på att du vill ta bort denna lärare?',
+				onConfirm: async () => {
+					showActionModal = false;
+					await deleteTeacher(selectedTeacherId);
+					resetForm();
+					getTeachers();
+				},
+				onCancel: () => {
+					showActionModal = false;
+				}
+			};
+			showActionModal = true;
 		} else {
-			alert('Vänligen välj en lärare att radera');
+			actionModalOptions = {
+				title: 'Fel',
+				message: 'Vänligen välj en lärare att ta bort',
+				onConfirm: () => {
+					showActionModal = false;
+				},
+				onCancel: null
+			};
+			showActionModal = true;
 		}
 	}
 
@@ -40,3 +59,12 @@
 	<br />
 	<button on:click={handleDelete}>Ta bort lärare</button>
 </div>
+
+{#if showActionModal}
+	<ActionModal
+		title={actionModalOptions.title}
+		message={actionModalOptions.message}
+		onConfirm={actionModalOptions.onConfirm}
+		onCancel={actionModalOptions.onCancel}
+	/>
+{/if}

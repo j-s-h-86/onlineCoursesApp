@@ -111,10 +111,10 @@ export async function deleteTeacher(id) {
 	}
 	const result = await response.json();
 	if (result.message === 'Teacher deleted successfully') {
-		alert('Coachen har tagits bort!');
+		alert('Läraren har tagits bort!');
 	} else {
 		console.error('Error: Teacher not deleted', result);
-		alert('Det gick inte att radera coachen');
+		alert('Det gick inte att radera läraren');
 	}
 }
 
