@@ -21,6 +21,16 @@
 		await getTeachers();
 	}
 
+	$: if (selectedTeacherId) {
+		const selectedTeacher = $teachers.find((teacher) => teacher.id === selectedTeacherId);
+		if (selectedTeacher) {
+			teacherName = selectedTeacher.teacherName || '';
+			teacherDescription = selectedTeacher.teacherDescription || '';
+			teacherEmail = selectedTeacher.teacherEmail || '';
+			teacherImg = selectedTeacher.teacherImg || '';
+		}
+	}
+
 	async function handleUpdate() {
 		if (selectedTeacherId) {
 			actionModalOptions = {

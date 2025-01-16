@@ -19,6 +19,15 @@
 		await getCourses();
 	}
 
+	$: if (selectedCourseId) {
+		const selectedCourse = $courses.find((course) => course.id === selectedCourseId);
+		if (selectedCourse) {
+			teacherId = selectedCourse.teacherId || '';
+			occasions = selectedCourse.occasions || '';
+			price = selectedCourse.price || '';
+		}
+	}
+
 	async function handleUpdate() {
 		if (selectedCourseId) {
 			actionModalOptions = {

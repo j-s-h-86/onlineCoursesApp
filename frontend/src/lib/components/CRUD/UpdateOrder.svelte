@@ -7,6 +7,7 @@
 	let showActionModal = false;
 	let actionModalOptions = {};
 	let selectedOrderId = '';
+	let selectedOrder = null;
 	let orderId = '';
 	let fullName = '';
 	let email = '';
@@ -19,6 +20,12 @@
 
 	async function getNewestData() {
 		await getOrders();
+	}
+
+	$: if (selectedOrderId) {
+		selectedOrder = $orders.find((order) => order.id === selectedOrderId);
+	} else {
+		selectedOrder = null;
 	}
 
 	async function handleUpdate() {
@@ -74,16 +81,28 @@
 			<option value={order.id}>{order.id}</option>
 		{/each}
 	</select>
-	{#if selectedOrderId}
+	{#if selectedOrder}
 		<div class="orderForm">
 			<form on:submit|preventDefault={handleUpdate}>
 				<div>
 					<label for="fullName">Namn:</label><br />
-					<input type="text" id="fullName" bind:value={fullName} required />
+					<input
+						type="text"
+						id="fullName"
+						bind:value={fullName}
+						placeholder={selectedOrder.fullName || ''}
+						required
+					/>
 				</div>
 				<div>
 					<label for="email">Epost:</label><br />
-					<input type="email" id="email" bind:value={email} required />
+					<input
+						type="email"
+						id="email"
+						bind:value={email}
+						placeholder={selectedOrder.email || ''}
+						required
+					/>
 				</div>
 
 				<div>
@@ -98,7 +117,13 @@
 
 				<div>
 					<label for="price">Pris:</label><br />
-					<input type="number" id="price" bind:value={price} required />
+					<input
+						type="number"
+						id="price"
+						bind:value={price}
+						placeholder={selectedOrder.price || ''}
+						required
+					/>
 				</div>
 
 				<button type="submit">Uppdatera order</button>
