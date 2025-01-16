@@ -24,7 +24,6 @@
 	});
 
 	$: if (dialog) {
-		console.log('Dialog element found');
 		if ($modalStates.purchaseModal) {
 			dialog.showModal();
 		} else {
