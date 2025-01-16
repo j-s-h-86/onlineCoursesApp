@@ -27,9 +27,16 @@
 				<h3>{course.name}</h3>
 				<span><b>Kursbeskrivning:</b></span>
 				<span>{course.description}</span>
-				<p>Lärare: {course.teacherName}</p>
-				<p>Antal tillfällen: {course.occasions}</p>
-				<p>Pris: {course.price} SEK</p>
+				<br />
+				<span><b>Lärare:</b></span>
+				<span>{course.teacherName}</span>
+				<br />
+				<span><b>Antal tillfällen:</b></span>
+				<span>{course.occasions}</span>
+				<br />
+				<span><b>Pris:</b></span>
+				<span>{course.price} SEK</span>
+				<br />
 				<button class="purchaseButton" on:click={() => openPurchaseModal(course)}>Köp kurs</button>
 			</div>
 		{/each}
@@ -44,6 +51,10 @@
 
 <style>
 	h2 {
+		color: #ffb764;
+	}
+
+	h3 {
 		color: #ffb764;
 	}
 
